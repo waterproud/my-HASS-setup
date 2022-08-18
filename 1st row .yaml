@@ -1,0 +1,794 @@
+square: false
+columns: 2
+type: grid
+cards:
+  - square: false
+    columns: 3
+    type: grid
+    cards:
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.clima_automatico_nodered
+        icon_color: green
+        secondary_info: none
+        icon: mdi:sun-thermometer-outline
+        layout: vertical
+        primary_info: none
+        tap_action:
+          action: toggle
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 50px !important;
+              border-radius: 100px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.clima_automatico_notte_nodered
+        icon_color: green
+        secondary_info: none
+        icon: mdi:weather-night
+        name: ' '
+        primary_info: none
+        layout: vertical
+        tap_action:
+          action: toggle
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 50px !important;
+              border-radius: 100px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        icon: mdi:timer-cog-outline
+        icon_color: purple
+        layout: vertical
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Timer
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 20px;
+                   padding-right: 20px;
+                   padding-left: 20px;
+                   padding-bottom: 20px;     
+                }
+              card:
+                type: grid
+                square: false
+                columns: 1
+                cards:
+                  - type: custom:scheduler-card
+                    standard_configuration: true
+                    discover_existing: true
+                    include:
+                      - climate
+                    exclude: []
+                    title: true
+                    sort_by:
+                      - state
+                      - relative-time
+                    display_options:
+                      primary_info: '{entity}: {action}'
+                      secondary_info:
+                        - relative-time
+                        - days
+                        - time
+                        - additional-tasks
+                      icon: action
+                      show_header_toggle: false
+                  - square: false
+                    columns: 1
+                    type: grid
+                    cards:
+                      - type: custom:mushroom-title-card
+                        title: >-
+                          {% if is_state('timer.timer_30min_hvac_sala',
+                          'active') %}
+
+                          Timer Daikin Sala: 
+
+                          {% elif is_state('timer.timer_1hr_hvac_sala',
+                          'active') %}
+
+                          Timer Daikin Sala: 
+
+                          {% elif is_state('timer.timer_2hr_hvac_sala',
+                          'active') %}
+
+                          Timer Daikin Sala: 
+
+                          {% else %}
+
+                          Opzioni Timer Daikin Sala:
+
+                          {% endif %}
+                        subtitle: >-
+                          {% if is_state('timer.timer_30min_hvac_sala',
+                          'active') %}
+
+                          attivo 30 minuti
+
+                          {% elif is_state('timer.timer_1hr_hvac_sala',
+                          'active') %}
+
+                          attivo 1 ora
+
+                          {% elif is_state('timer.timer_2hr_hvac_sala',
+                          'active') %}
+
+                          attivo 2 ore
+
+                          {% else %}
+
+                          Nessun Timer Attivo
+
+                          {% endif %}
+                      - type: custom:timer-bar-card
+                        entities:
+                          - timer.timer_30min_hvac_sala
+                          - timer.timer_1hr_hvac_sala
+                          - timer.timer_2hr_hvac_sala
+                        bar_direction: rtl
+                        invert: true
+                        compressed: true
+                        bar_foreground: linear-gradient(to right, green, yellow,red)
+                        layout: full_row
+                        filter: true
+                        bar_radius: 10px
+                        bar_height: 10px
+                        text_width: 6em
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              border-radius: 20px !important; 
+                              }
+                      - square: false
+                        columns: 4
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: >-
+                              {% if is_state('timer.timer_30min_hvac_sala',
+                              'active') %}
+
+                              30 min
+
+                              {% else %}
+
+                              30 min
+
+                              {% endif %}
+                            icon: mdi:timer
+                            entity: timer.timer_2hr_hvac_sala
+                            icon_color: >-
+                              {% if is_state('timer.timer_30min_hvac_sala',
+                              'active') %}
+
+                              green
+
+                              {% else %}
+
+                              grey
+
+                              {% endif %}
+                            tap_action:
+                              action: call-service
+                              service: timer.start
+                              data: {}
+                              target:
+                                entity_id: timer.timer_30min_hvac_sala
+                            hold_action:
+                              action: none
+                            double_tap_action:
+                              action: none
+                            layout: vertical
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                  border-radius: 25px !important;
+                                  height: 85px !important;
+                                  }
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: >-
+                              {% if is_state('timer.timer_1hr_hvac_sala',
+                              'active') %}
+
+                              1 ora
+
+                              {% else %}
+
+                              1 ora
+
+                              {% endif %}
+                            icon: mdi:timer
+                            entity: timer.timer_1hr_hvac_sala
+                            icon_color: >-
+                              {% if is_state('timer.timer_1hr_hvac_sala',
+                              'active') %}
+
+                              green
+
+                              {% else %}
+
+                              grey
+
+                              {% endif %}
+                            tap_action:
+                              action: call-service
+                              service: timer.start
+                              data: {}
+                              target:
+                                entity_id: timer.timer_1hr_hvac_sala
+                            hold_action:
+                              action: none
+                            double_tap_action:
+                              action: none
+                            layout: vertical
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                  border-radius: 25px !important;
+                                  height: 85px !important;
+                                  }
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: >-
+                              {% if is_state('timer.timer_2hr_hvac_sala',
+                              'active') %}
+
+                              2 ore
+
+                              {% else %}
+
+                              2 ore
+
+                              {% endif %}
+                            icon: mdi:timer
+                            entity: timer.timer_2hr_hvac_sala
+                            icon_color: >-
+                              {% if is_state('timer.timer_2hr_hvac_sala',
+                              'active') %}
+
+                              green
+
+                              {% else %}
+
+                              grey
+
+                              {% endif %}
+                            tap_action:
+                              action: call-service
+                              service: timer.start
+                              data: {}
+                              target:
+                                entity_id: timer.timer_2hr_hvac_sala
+                            hold_action:
+                              action: none
+                            double_tap_action:
+                              action: none
+                            layout: vertical
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                  border-radius: 25px !important;
+                                  height: 85px !important;
+                                  }
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: Stop
+                            icon: mdi:stop
+                            entity: timer.timer_1hr_hvac_salotto
+                            icon_color: >-
+                              {% if is_state('timer.timer_30min_hvac_sala',
+                              'active') or is_state('timer.timer_1hr_hvac_sala',
+                              'active') or is_state('timer.timer_2hr_hvac_sala',
+                              'active') %}
+
+                              red
+
+                              {% else %}
+
+                              grey
+
+                              {% endif %}
+                            tap_action:
+                              action: call-service
+                              service: timer.cancel
+                              data: {}
+                              target:
+                                entity_id:
+                                  - timer.timer_2hr_hvac_sala
+                                  - timer.timer_1hr_hvac_sala
+                                  - timer.timer_30min_hvac_sala
+                            hold_action:
+                              action: none
+                            double_tap_action:
+                              action: none
+                            layout: vertical
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                  border-radius: 25px !important;
+                                  height: 85px !important;
+                                  }
+                  - square: false
+                    columns: 1
+                    type: grid
+                    cards:
+                      - type: custom:mushroom-title-card
+                        title: >-
+                          {% if is_state('timer.timer_30min_hvac_salotto',
+                          'active') %}
+
+                          Timer Daikin Salotto:
+
+                          {% elif is_state('timer.timer_1hr_hvac_salotto',
+                          'active') %}
+
+                          Timer Daikin Salotto:
+
+                          {% elif is_state('timer.timer_2hr_hvac_salotto',
+                          'active') %}
+
+                          Timer Daikin Salotto:
+
+                          {% else %}
+
+                          Opzioni Timer Daikin Salotto:
+
+                          {% endif %}
+                        subtitle: >-
+                          {% if is_state('timer.timer_30min_hvac_salotto',
+                          'active') %}
+
+                          attivo 30 minuti
+
+                          {% elif is_state('timer.timer_1hr_hvac_salotto',
+                          'active') %}
+
+                          attivo 1 ora
+
+                          {% elif is_state('timer.timer_2hr_hvac_salotto',
+                          'active') %}
+
+                          attivo 2 ore
+
+                          {% else %}
+
+                          Nessun Timer Attivo
+
+                          {% endif %}
+                      - type: custom:timer-bar-card
+                        entities:
+                          - timer.timer_30min_hvac_salotto
+                          - timer.timer_1hr_hvac_salotto
+                          - timer.timer_2hr_hvac_salotto
+                        bar_direction: rtl
+                        invert: true
+                        compressed: true
+                        bar_foreground: linear-gradient(to right, green, yellow,red)
+                        layout: full_row
+                        filter: true
+                        bar_radius: 10px
+                        bar_height: 10px
+                        text_width: 6em
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              border-radius: 20px !important; 
+                              }
+                      - square: false
+                        columns: 4
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: >-
+                              {% if is_state('timer.timer_30min_hvac_salotto',
+                              'active') %}
+
+                              30 min
+
+                              {% else %}
+
+                              30 min
+
+                              {% endif %}
+                            icon: mdi:timer
+                            entity: timer.timer_2hr_hvac_salotto
+                            icon_color: >-
+                              {% if is_state('timer.timer_30min_hvac_salotto',
+                              'active') %}
+
+                              green
+
+                              {% else %}
+
+                              grey
+
+                              {% endif %}
+                            tap_action:
+                              action: call-service
+                              service: timer.start
+                              data: {}
+                              target:
+                                entity_id: timer.timer_30min_hvac_salotto
+                            hold_action:
+                              action: none
+                            double_tap_action:
+                              action: none
+                            layout: vertical
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                  border-radius: 25px !important;
+                                  height: 85px !important;
+                                  }
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: >-
+                              {% if is_state('timer.timer_1hr_hvac_salotto',
+                              'active') %}
+
+                              1 ora
+
+                              {% else %}
+
+                              1 ora
+
+                              {% endif %}
+                            icon: mdi:timer
+                            entity: timer.timer_1hr_hvac_salotto
+                            icon_color: >-
+                              {% if is_state('timer.timer_1hr_hvac_salotto',
+                              'active') %}
+
+                              green
+
+                              {% else %}
+
+                              grey
+
+                              {% endif %}
+                            tap_action:
+                              action: call-service
+                              service: timer.start
+                              data: {}
+                              target:
+                                entity_id: timer.timer_1hr_hvac_salotto
+                            hold_action:
+                              action: none
+                            double_tap_action:
+                              action: none
+                            layout: vertical
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                  border-radius: 25px !important;
+                                  height: 85px !important;
+                                  }
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: >-
+                              {% if is_state('timer.timer_2hr_hvac_salotto',
+                              'active') %}
+
+                              2 ore
+
+                              {% else %}
+
+                              2 ore
+
+                              {% endif %}
+                            icon: mdi:timer
+                            entity: timer.timer_2hr_hvac_salotto
+                            icon_color: >-
+                              {% if is_state('timer.timer_2hr_hvac_salotto',
+                              'active') %}
+
+                              green
+
+                              {% else %}
+
+                              grey
+
+                              {% endif %}
+                            tap_action:
+                              action: call-service
+                              service: timer.start
+                              data: {}
+                              target:
+                                entity_id: timer.timer_2hr_hvac_salotto
+                            hold_action:
+                              action: none
+                            double_tap_action:
+                              action: none
+                            layout: vertical
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                  border-radius: 25px !important;
+                                  height: 85px !important;
+                                  }
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: Stop
+                            icon: mdi:stop
+                            entity: timer.timer_1hr_hvac_salotto
+                            icon_color: >-
+                              {% if is_state('timer.timer_30min_hvac_salotto',
+                              'active') or
+                              is_state('timer.timer_1hr_hvac_salotto', 'active')
+                              or is_state('timer.timer_2hr_hvac_salotto',
+                              'active') %}
+
+                              red
+
+                              {% else %}
+
+                              grey
+
+                              {% endif %}
+                            tap_action:
+                              action: call-service
+                              service: timer.cancel
+                              data: {}
+                              target:
+                                entity_id:
+                                  - timer.timer_2hr_hvac_salotto
+                                  - timer.timer_1hr_hvac_salotto
+                                  - timer.timer_30min_hvac_salotto
+                            hold_action:
+                              action: none
+                            double_tap_action:
+                              action: none
+                            layout: vertical
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                  border-radius: 25px !important;
+                                  height: 85px !important;
+                                  }
+        primary_info: none
+        secondary_info: none
+        entity: sensor.shellyem_98cdac1f3a41_channel_1_power
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 50px !important;
+              border-radius: 100px !important; 
+              }
+  - type: custom:mushroom-alarm-control-panel-card
+    entity: alarm_control_panel.alarmo
+    states: []
+    name: Allarme
+    double_tap_action:
+      action: call-service
+      service: alarmo.disarm
+      service_data:
+        entity_id: alarm_control_panel.alarmo
+      target: {}
+    hold_action:
+      action: call-service
+      service: alarmo.disarm
+      service_data:
+        entity_id: alarm_control_panel.alarmo
+      target: {}
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Opzioni Allarme
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px;     
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - type: custom:mushroom-title-card
+                title: >-
+                  {% if is_state('alarm_control_panel.alarmo', 'disarmed') %}
+
+                  Stato allarme: DISATTIVATO
+
+                  {% elif is_state('alarm_control_panel.alarmo', 'armed_away')
+                  %}
+
+                  Stato allarme: ATTIVO, FUORI CASA
+
+                  {% elif is_state('alarm_control_panel.alarmo', 'armed_night')
+                  %}
+
+                  Stato allarme: ATTIVO, NOTTE
+
+                  {% elif is_state('alarm_control_panel.alarmo', 'armed_home')
+                  %}
+
+                  Stato allarme: GUEST MODE
+
+                  {% else %}
+
+                  Stato allarme: !!ERROR!!
+
+                  {% endif %}
+                subtitle: ''
+                alignment: center
+              - type: custom:mushroom-alarm-control-panel-card
+                entity: alarm_control_panel.alarmo
+                states: []
+                show_keypad: false
+                secondary_info: none
+                fill_container: true
+                layout: vertical
+                hold_action:
+                  action: more-info
+                double_tap_action:
+                  action: more-info
+                tap_action:
+                  action: call-service
+                  service: alarmo.disarm
+                  data:
+                    entity_id: alarm_control_panel.alarmo
+                  target: {}
+                primary_info: state
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                      height: 100px !important;
+                      border-radius: 25px !important; 
+                      }
+              - square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-alarm-control-panel-card
+                    entity: alarm_control_panel.alarmo
+                    states:
+                      - armed_away
+                    icon_type: none
+                    primary_info: name
+                    secondary_info: none
+                    name: Modalità fuori casa
+                    show_keypad: false
+                    icon: ''
+                    layout: vertical
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 100px !important;
+                          border-radius: 25px !important; 
+                          }
+                  - type: custom:mushroom-alarm-control-panel-card
+                    entity: alarm_control_panel.alarmo
+                    states:
+                      - armed_night
+                    icon_type: none
+                    primary_info: name
+                    secondary_info: none
+                    name: Modalità notte
+                    layout: vertical
+                    show_keypad: false
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 100px !important;
+                          border-radius: 25px !important; 
+                          }
+                  - type: custom:mushroom-alarm-control-panel-card
+                    entity: alarm_control_panel.alarmo
+                    states:
+                      - armed_home
+                    icon_type: none
+                    primary_info: name
+                    secondary_info: none
+                    name: Modalità Ospiti
+                    show_keypad: false
+                    icon: ''
+                    layout: vertical
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 100px !important;
+                          border-radius: 25px !important; 
+                          }
+              - type: custom:mushroom-title-card
+                title: ''
+                subtitle: '----- Attivazione sirena manuale -----'
+                alignment: center
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.0x0015bc003100c2bf_battery
+                    icon_color: amber
+                    tap_action:
+                      action: call-service
+                      service: input_boolean.turn_off
+                      service_data: {}
+                      target:
+                        entity_id: input_boolean.alarm_triggered
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    secondary_info: none
+                    name: Disattivazione Sirena
+                    icon: mdi:alarm-light-off-outline
+                    layout: vertical
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 100px !important;
+                          border-radius: 25px !important; 
+                          }
+                  - type: custom:mushroom-entity-card
+                    entity: input_boolean.alarm_triggered
+                    icon_color: red
+                    icon: mdi:alarm-light-outline
+                    tap_action:
+                      action: call-service
+                      service: input_boolean.turn_on
+                      service_data: {}
+                      target:
+                        entity_id: input_boolean.alarm_triggered
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    secondary_info: none
+                    name: Attivazione Sirena
+                    layout: vertical
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 100px !important;
+                          border-radius: 25px !important; 
+                          }
+    card_mod:
+      style:
+        .: |
+          ha-card {
+          height: 50px !important;
+          border-radius: 100px !important; 
+          }

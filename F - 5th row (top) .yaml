@@ -1,0 +1,1881 @@
+square: false
+columns: 4
+type: grid
+cards:
+  - type: custom:mushroom-template-card
+    icon: mdi:robot-vacuum
+    layout: vertical
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Opzioni Roomba
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px;  
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - type: custom:mushroom-template-card
+                primary: |-
+                  {% if is_state('vacuum.roomba966', 'cleaning') %}
+                  Roomba in pulizia
+                  {% elif is_state('vacuum.roomba966', 'returning') %}
+                  Roomba sta tornando alla base
+                  {% elif is_state('vacuum.roomba966', 'error') %}
+                  Roomba in errore
+                  {% elif is_state('vacuum.roomba966', 'paused') %}
+                  Roomba in pausa
+                  {% elif is_state('vacuum.roomba966', 'idle') %}
+                  Roomba in attesa
+                  {% elif is_state('vacuum.roomba966', 'docked') %}
+                  Roomba in base
+                  {% else %}
+                  Roomba non raggiungibile
+                  {% endif %}
+                secondary: ''
+                icon: mdi:robot-vacuum
+                icon_color: |-
+                  {% if is_state('vacuum.roomba966', 'cleaning') %}
+                  green
+                  {% elif is_state('vacuum.roomba966', 'returning') %}
+                  amber
+                  {% elif is_state('vacuum.roomba966', 'error') %}
+                  red
+                  {% elif is_state('vacuum.roomba966', 'paused') %}
+                  blue
+                  {% elif is_state('vacuum.roomba966', 'idle') %}
+                  blue
+                  {% elif is_state('vacuum.roomba966', 'unavailable') %}
+                  black
+                  {% else %}
+                  grey
+                  {% endif %}
+                entity: vacuum.roomba966
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                layout: vertical
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                        height: 100px !important;
+                      }
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.roomba966_battery_level
+                    name: Batteria
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                  - type: custom:mushroom-entity-card
+                    entity: binary_sensor.roomba966_bin_full
+                    name: Cestino
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon_color: red
+              - square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.roomba966_battery_level
+                    icon: mdi:play
+                    icon_color: green
+                    name: Inizia pulizia
+                    layout: vertical
+                    primary_info: name
+                    secondary_info: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: vacuum.start
+                      service_data: {}
+                      target:
+                        entity_id: vacuum.roomba966
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.roomba966_battery_level
+                    icon: mdi:stop
+                    icon_color: red
+                    layout: vertical
+                    primary_info: name
+                    secondary_info: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: vacuum.stop
+                      service_data: {}
+                      target:
+                        entity_id: vacuum.roomba966
+                    name: Stop
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.roomba966_battery_level
+                    icon_color: orange
+                    layout: vertical
+                    primary_info: name
+                    secondary_info: none
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: vacuum.return_to_base
+                      service_data: {}
+                      target:
+                        entity_id: vacuum.roomba966
+                    name: Ritorna alla base
+                    icon: mdi:home-import-outline
+    icon_color: |-
+      {% if is_state('vacuum.roomba966', 'cleaning') %}
+      green
+      {% elif is_state('vacuum.roomba966', 'returning') %}
+      amber
+      {% elif is_state('vacuum.roomba966', 'error') %}
+      red
+      {% elif is_state('vacuum.roomba966', 'paused') %}
+      blue
+      {% elif is_state('vacuum.roomba966', 'idle') %}
+      blue
+      {% elif is_state('vacuum.roomba966', 'unavailable') %}
+      black
+      {% else %}
+      grey
+      {% endif %}
+    entity: vacuum.roomba966
+    secondary: ''
+    primary: Roomba
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 70px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }
+  - type: custom:mushroom-template-card
+    icon: mdi:spotify
+    entity: media_player.spotify_francesco_raspa
+    layout: vertical
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Opzioni Musica
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px; 
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - type: custom:mushroom-template-card
+                primary: >-
+                  {% if is_state('media_player.spotify_francesco_raspa', 'idle')
+                  %}
+
+                  Lancia spotify
+
+                  {% else %}
+
+
+                  {% endif %}
+                secondary: ''
+                icon: >-
+                  {% if is_state('media_player.spotify_francesco_raspa', 'idle')
+                  %}
+
+                  mdi:spotify
+
+                  {% else %}
+
+
+                  {% endif %}
+                icon_color: ''
+                entity: button.spotify_play_tuttacasa
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                layout: vertical
+                card_mod:
+                  style:
+                    .: |
+                      :host {
+                        --ha-card-border-radius: 25px !important;
+                      }
+                      ha-card {
+                      height: 150px;
+                      }
+              - type: custom:mini-media-player
+                entity: media_player.spotify_francesco_raspa
+                group: false
+                hide:
+                  name: true
+                  power: true
+                  source: false
+                  mute: true
+                  prev: true
+                  next: true
+                  play_pause: true
+                  volume: true
+                  runtime: false
+                tap_action:
+                  action: navigate
+                  navigation_path: /media-browser/media_player.spotify_francesco_raspa
+                info: short
+                replace_mute: play_pause
+                artwork: material
+                source: icon
+                sound_mode: full
+                card_mod:
+                  style:
+                    .: |
+                      :host {
+                        --ha-card-border-radius: 25px !important;
+                        --mini-media-player-scale: 1.11 !important;
+                      }
+                      ha-card {
+                      height: 150px;
+                      }
+              - type: custom:mushroom-media-player-card
+                entity: media_player.spotify_francesco_raspa
+                primary_info: none
+                fill_container: false
+                use_media_info: false
+                show_volume_level: false
+                volume_controls: []
+                media_controls:
+                  - play_pause_stop
+                  - next
+                  - shuffle
+                  - previous
+                icon_type: none
+                secondary_info: none
+                collapsible_controls: false
+                card_mod:
+                  style:
+                    .: |
+                      :host {
+                        --ha-card-border-radius: 25px !important;
+                      }
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - square: false
+                    columns: 2
+                    type: grid
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: ''
+                        secondary: ''
+                        icon: mdi:volume-mute
+                        icon_color: amber
+                        layout: vertical
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        tap_action:
+                          action: call-service
+                          service: media_player.volume_set
+                          target:
+                            device_id: 41e87753ecee79629c9cac00fadb9dd1
+                          data:
+                            volume_level: 0
+                        card_mod:
+                          style:
+                            .: |
+                              :host {
+                                --ha-card-border-radius: 25px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: ''
+                        secondary: ''
+                        icon: mdi:restore
+                        icon_color: blue
+                        layout: vertical
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        tap_action:
+                          action: call-service
+                          service: media_player.volume_set
+                          target:
+                            device_id: 41e87753ecee79629c9cac00fadb9dd1
+                          data:
+                            volume_level: 0.4
+                        card_mod:
+                          style:
+                            .: |
+                              :host {
+                                --ha-card-border-radius: 25px !important;
+                              }
+                  - type: custom:mini-media-player
+                    entity: media_player.spotify_francesco_raspa
+                    group: false
+                    hide:
+                      name: true
+                      icon: true
+                      info: true
+                      power: true
+                      source: true
+                      mute: true
+                      prev: true
+                      next: true
+                      progress: true
+                      play_pause: true
+                    info: scroll
+                    replace_mute: play_pause
+                    artwork: cover
+                    source: full
+                    sound_mode: full
+                    toggle_power: false
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --ha-card-border-radius: 25px !important;
+                            --mini-media-player-scale: 1 !important;
+                          }
+                          ha-card {
+                          height: 65px;
+                          }
+              - type: custom:mushroom-title-card
+                title: ''
+                subtitle: '----- Multi-room Speakers -----'
+                alignment: center
+              - type: custom:mini-media-player
+                entity: media_player.spotify_francesco_raspa
+                group: true
+                hide:
+                  name: true
+                  power: true
+                  source: true
+                  mute: true
+                  prev: true
+                  next: true
+                  play_pause: true
+                  volume: true
+                  runtime: true
+                  info: true
+                  icon: true
+                  progress: true
+                info: short
+                replace_mute: play_pause
+                artwork: none
+                source: icon
+                sound_mode: full
+                shortcuts:
+                  columns: 3
+                  buttons:
+                    - icon: hue:home
+                      type: source
+                      id: TUTTA CASA
+                      name: Casa
+                    - icon: hue:downstairs
+                      type: source
+                      id: SOTTO
+                      name: Sotto
+                    - icon: hue:upstairs
+                      type: source
+                      id: SOPRA
+                      name: Sopra
+                card_mod:
+                  style:
+                    mmp-shortcuts:
+                      $: |
+                        mmp-button {
+                          box-shadow: none;
+                          background: none;
+                          border: solid 1px grey;
+                          border-radius: 20px
+                        }
+                        mmp-button {
+                          height: 50px;
+                        }
+                    .: |
+                      :host {
+                        --mini-media-player-scale: 1 !important;
+                      }
+                      ha-card {
+                      height: 60px;
+                      }
+              - type: custom:mushroom-title-card
+                title: ''
+                subtitle: '----- Speakers Singoli -----'
+                alignment: center
+              - type: custom:mini-media-player
+                entity: media_player.spotify_francesco_raspa
+                group: true
+                hide:
+                  name: true
+                  power: true
+                  source: true
+                  mute: true
+                  prev: true
+                  next: true
+                  play_pause: true
+                  volume: true
+                  runtime: true
+                  info: true
+                  icon: true
+                  progress: true
+                info: short
+                replace_mute: play_pause
+                artwork: none
+                source: icon
+                sound_mode: full
+                shortcuts:
+                  columns: 3
+                  buttons:
+                    - icon: hue:room-dining
+                      type: source
+                      id: Echo CUCINA
+                      name: Sala
+                    - icon: hue:room-bedroom
+                      type: source
+                      id: Echo CAMERA
+                      name: Camera
+                    - icon: hue:room-office
+                      type: source
+                      id: Echo UFFICIO
+                      name: Ufficio
+                card_mod:
+                  style:
+                    mmp-shortcuts:
+                      $: |
+                        mmp-button {
+                          box-shadow: none;
+                          background: none;
+                          border: solid 1px grey;
+                          border-radius: 20px
+                        }
+                        mmp-button {
+                          height: 50px;
+                        }
+                    .: |
+                      :host {
+                        --mini-media-player-scale: 1 !important;
+                      }
+                      ha-card {
+                      height: 60px;
+                      }
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    icon_color: |-
+      {% if is_state('media_player.spotify_francesco_raspa', 'idle') %}
+      grey
+      {% elif is_state('media_player.spotify_francesco_raspa', 'unavailable') %}
+      black
+      {% else %}
+      green
+      {% endif %}
+    secondary: ''
+    primary: Musica
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 70px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }
+  - type: custom:mushroom-template-card
+    icon: mdi:television
+    layout: vertical
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Telecomando TV
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px; 
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - type: custom:mushroom-template-card
+                primary: ''
+                secondary: ''
+                icon: mdi:power
+                entity: media_player.lg_webos_smart_tv
+                layout: vertical
+                icon_color: |-
+                  {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                  green
+                  {% elif is_state('media_player.lg_webos_smart_tv', 'off') %}
+                  red
+                  {% else %}
+                  grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                tap_action:
+                  action: call-service
+                  service: remote.send_command
+                  service_data:
+                    device: tvsalotto
+                    command: toggle on off
+                    entity_id: remote.broadlink_remote
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                      border-radius: 25px !important;
+                      height: 75px !important;
+                      }
+                      :host {
+                      --mush-icon-size: 55px;
+                      margin-left: 70px !important;
+                      margin-right: 70px !important;
+                      }
+              - square: false
+                columns: 3
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:volume-plus
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      blue
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: volumeup
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:home
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      purple
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: home
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          margin-left: 20px !important;
+                          margin-right: 20px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:plus
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      cyan
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: channelup
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          }
+              - square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:volume-off
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      amber
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: mute
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          }
+              - square: false
+                columns: 3
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:volume-minus
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      blue
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: volumedown
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:cog-outline
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      purple
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: settings
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          margin-left: 20px !important;
+                          margin-right: 20px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:minus
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      cyan
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: channeldown
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          }
+              - type: grid
+                cards:
+                  - type: picture
+                    image: >-
+                      https://assets.materialup.com/uploads/57194301-5bfe-4b2c-9f17-1c1de930c496/avatar.png
+                    tap_action:
+                      action: call-service
+                      service: media_player.select_source
+                      service_data:
+                        source: Plex
+                      target:
+                        entity_id:
+                          - media_player.lg_webos_smart_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          }
+                  - type: picture
+                    image: >-
+                      https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg
+                    tap_action:
+                      action: call-service
+                      service: media_player.select_source
+                      service_data:
+                        source: Disney+
+                      target:
+                        entity_id:
+                          - media_player.lg_webos_smart_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          }
+                  - type: picture
+                    image: >-
+                      https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png?w=684&h=456
+                    tap_action:
+                      action: call-service
+                      service: media_player.select_source
+                      service_data:
+                        source: Netflix
+                      target:
+                        entity_id:
+                          - media_player.lg_webos_smart_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          }
+                  - type: picture
+                    image: >-
+                      https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Amazon_Prime_Logo.svg/320px-Amazon_Prime_Logo.svg.png
+                    tap_action:
+                      action: call-service
+                      service: media_player.select_source
+                      service_data:
+                        source: Amazon Prime Video
+                      target:
+                        entity_id:
+                          - media_player.lg_webos_smart_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          }
+                  - type: picture
+                    image: >-
+                      https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/YouTube_social_red_square_%282017%29.svg/2048px-YouTube_social_red_square_%282017%29.svg.png
+                    tap_action:
+                      action: call-service
+                      service: media_player.select_source
+                      service_data:
+                        source: YouTube
+                      target:
+                        entity_id:
+                          - media_player.lg_webos_smart_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          }
+                  - type: picture
+                    image: >-
+                      https://st2.depositphotos.com/8301258/11526/v/600/depositphotos_115268520-stock-illustration-tvmovie-logo-vector.jpg
+                    tap_action:
+                      action: call-service
+                      service: media_player.select_source
+                      service_data:
+                        source: Live TV
+                      target:
+                        entity_id: media_player.lg_webos_smart_tv
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          }
+                square: false
+                columns: 6
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:play
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      green
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: play
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          margin-left: 60px !important;
+                          margin-right: 0px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:pause
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      amber
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: pause
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          margin-left: 0px !important;
+                          margin-right: 60px !important;
+                          }
+              - square: false
+                columns: 3
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:check-bold
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      green
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: enter
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:arrow-up-bold-outline
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      purple
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: up
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          margin-left: 20px !important;
+                          margin-right: 20px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:backspace-outline
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      red
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: exit
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:arrow-left-bold-outline
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      purple
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: left
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          margin-left: 60px !important;
+                          margin-right: -20px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:arrow-down-bold-outline
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      purple
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: down
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          margin-left: 20px !important;
+                          margin-right: 20px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: ''
+                    icon: mdi:arrow-right-bold-outline
+                    entity: media_player.lg_webos_smart_tv
+                    layout: vertical
+                    icon_color: |-
+                      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+                      purple
+                      {% else %}
+                      grey
+                      {% endif %}
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        device: tvsalotto
+                        command: right
+                        entity_id: remote.broadlink_remote
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 25px !important;
+                          height: 75px !important;
+                          }
+                          :host {
+                          --mush-icon-size: 55px;
+                          margin-left: -20px !important;
+                          margin-right: 60px !important;
+                          }
+    icon_color: |-
+      {% if is_state('media_player.lg_webos_smart_tv', 'on') %}
+      purple
+      {% elif is_state('media_player.lg_webos_smart_tv', 'unavailable') %}
+      black
+      {% else %}
+      grey
+      {% endif %}
+    entity: media_player.lg_webos_smart_tv
+    secondary: ''
+    primary: TV
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 70px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }
+  - type: custom:mushroom-template-card
+    icon: mdi:car
+    layout: vertical
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Dettagli Auto
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px; 
+               heigh: 500px;
+            }
+          card:
+            type: grid
+            cards:
+              - type: grid
+                cards:
+                  - type: grid
+                    cards:
+                      - type: picture-entity
+                        entity: device_tracker.116d
+                        image: https://i.imgur.com/bP4NZbl.png
+                        aspect_ratio: '1'
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              height: 170px !important;
+                              border-radius: 15px !important; 
+                              }
+                      - type: map
+                        entities:
+                          - entity: person.bmw
+                        default_zoom: 12
+                        dark_mode: false
+                        hours_to_show: 0
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              height: 170px !important;
+                              border-radius: 15px !important; 
+                              }
+                    columns: 2
+                    square: false
+                  - type: custom:mushroom-template-card
+                    primary: >-
+                      {% if is_state('binary_sensor.116d_door_lock_state',
+                      'off') and is_state('device_tracker.116d', 'home')  %}
+
+                      Auto Bloccata, in Casa
+
+                      {% elif is_state('binary_sensor.116d_door_lock_state',
+                      'off') and is_state('device_tracker.116d', 'not_home')  %}
+
+                      Auto Bloccata, fuori Casa
+
+                      {% elif is_state('binary_sensor.116d_door_lock_state',
+                      'on') and is_state('device_tracker.116d', 'home')  %}
+
+                      Auto Sbloccata, in Casa
+
+                      {% elif is_state('binary_sensor.116d_door_lock_state',
+                      'on') and is_state('device_tracker.116d', 'not_home')  %}
+
+                      Auto Sbloccata, fuori Casa
+
+                      {% else %}
+
+                      NON RAGGIUNGIBILE
+
+                      {% endif %}
+                    secondary: ''
+                    icon: mdi:car-key
+                    entity: binary_sensor.116d_door_lock_state
+                    icon_color: >-
+                      {% if is_state('binary_sensor.116d_door_lock_state',
+                      'off') and is_state('device_tracker.116d', 'home')  %}
+
+                      green
+
+                      {% elif is_state('binary_sensor.116d_door_lock_state',
+                      'off') and is_state('device_tracker.116d', 'not_home')  %}
+
+                      green
+
+                      {% elif is_state('binary_sensor.116d_door_lock_state',
+                      'on') and is_state('device_tracker.116d', 'home')  %}
+
+                      red
+
+                      {% elif is_state('binary_sensor.116d_door_lock_state',
+                      'on') and is_state('device_tracker.116d', 'not_home')  %}
+
+                      red
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    layout: horizontal
+                    fill_container: true
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 60px !important;
+                          border-radius: 25px !important; 
+                          }
+                  - square: false
+                    columns: 2
+                    type: grid
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: >-
+                          {% if is_state('binary_sensor.116d_windows', 'off') %}
+
+                          Finestrini
+
+                          {% elif is_state('binary_sensor.116d_windows', 'on')
+                          %}
+
+                          Finestrini
+
+                          {% else %}
+
+                          Non raggiungibile
+
+                          {% endif %}
+                        secondary: >-
+                          {% if is_state('binary_sensor.116d_windows', 'off') %}
+
+                          Chiusi
+
+                          {% elif is_state('binary_sensor.116d_windows', 'on')
+                          %}
+
+                          Aperti
+
+                          {% else %}
+
+                          Non raggiungibile
+
+                          {% endif %}
+                        icon: mdi:car-door
+                        entity: binary_sensor.116d_windows
+                        icon_color: >-
+                          {% if is_state('binary_sensor.116d_windows', 'off') %}
+
+                          green
+
+                          {% elif is_state('binary_sensor.116d_windows', 'on')
+                          %}
+
+                          red
+
+                          {% else %}
+
+                          black
+
+                          {% endif %}
+                        tap_action:
+                          action: more-info
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              height: 60px !important;
+                              border-radius: 25px !important; 
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: |-
+                          {% if is_state('binary_sensor.116d_lids', 'off') %}
+                          Portiere
+                          {% elif is_state('binary_sensor.116d_lids', 'on') %}
+                          Portiere
+                          {% else %}
+                          Non raggiungibile
+                          {% endif %}
+                        secondary: |-
+                          {% if is_state('binary_sensor.116d_lids', 'off') %}
+                          Chiuse
+                          {% elif is_state('binary_sensor.116d_lids', 'on') %}
+                          Aperte
+                          {% else %}
+                          Non raggiungibile
+                          {% endif %}
+                        icon: mdi:car-door-lock
+                        entity: binary_sensor.116d_lids
+                        icon_color: |-
+                          {% if is_state('binary_sensor.116d_lids', 'off') %}
+                          green
+                          {% elif is_state('binary_sensor.116d_lids', 'on') %}
+                          red
+                          {% else %}
+                          black
+                          {% endif %}
+                        tap_action:
+                          action: more-info
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              height: 60px !important;
+                              border-radius: 25px !important; 
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: >-
+                          {% if is_state('sensor.116d_mileage', 'unavailable')
+                          %}
+
+                          Non raggiungibile
+
+                          {% else %}
+
+                          {{states('sensor.116d_mileage') }} Km
+
+                          {% endif %}
+                        secondary: ''
+                        icon: mdi:speedometer
+                        entity: sensor.116d_mileage
+                        icon_color: >-
+                          {% if is_state('sensor.116d_mileage', 'unavailable')
+                          %}
+
+                          black
+
+                          {% else %}
+
+                          blue
+
+                          {% endif %}
+                        tap_action:
+                          action: more-info
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              height: 60px !important;
+                              border-radius: 25px !important; 
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: >
+                          {% if is_state('sensor.116d_mileage', 'unavailable')
+                          %}
+
+                          Non raggiungibile
+
+                          {% else %}
+
+                          Olio tra:
+
+                          {% endif %}
+                        secondary: >-
+                          {% if is_state('sensor.116d_mileage', 'unavailable')
+                          %}
+
+                          Non raggiungibile
+
+                          {% else %}
+
+                          {{
+                          state_attr('binary_sensor.116d_condition_based_services',
+                          'oil distance') }}
+
+                          {% endif %}
+                        icon: mdi:oil
+                        entity: sensor.116d_oil_distance
+                        icon_color: >-
+                          {% if is_state ('sensor.116d_oil_distance', '5000 km')
+                          %}
+
+                          yellow
+
+                          {% elif is_state ('sensor.116d_oil_distance', '4000
+                          km') %}
+
+                          amber
+
+                          {% elif is_state ('sensor.116d_oil_distance', '3000
+                          km') %}
+
+                          orange
+
+                          {% elif is_state ('sensor.116d_oil_distance', '2000
+                          km') %}
+
+                          deep-orange
+
+                          {% elif is_state ('sensor.116d_oil_distance', '1000
+                          km') %}
+
+                          red
+
+                          {% else %}
+
+                          blue
+
+                          {% endif %}
+                        tap_action:
+                          action: more-info
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              height: 60px !important;
+                              border-radius: 25px !important; 
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: >-
+                          {% if
+                          is_state('binary_sensor.116d_check_control_messages',
+                          'off') %}
+
+                          Check: OK
+
+                          {% elif
+                          is_state('binary_sensor.116d_check_control_messages',
+                          'on') %}
+
+                          Check: !!!
+
+                          {% else %}
+
+                          Non raggiungibile
+
+                          {% endif %}
+                        secondary: ''
+                        icon: mdi:car-tire-alert
+                        entity: binary_sensor.116d_check_control_messages
+                        icon_color: >-
+                          {% if
+                          is_state('binary_sensor.116d_check_control_messages',
+                          'off') %}
+
+                          green
+
+                          {% elif
+                          is_state('binary_sensor.116d_check_control_messages',
+                          'on') %}
+
+                          red
+
+                          {% else %}
+
+                          black
+
+                          {% endif %}
+                        tap_action:
+                          action: more-info
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        layout: horizontal
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              height: 60px !important;
+                              border-radius: 25px !important; 
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: >-
+                          {% if
+                          is_state('binary_sensor.116d_condition_based_services',
+                          'off') %}
+
+                          Service: OK
+
+                          {% elif
+                          is_state('binary_sensor.116d_condition_based_services',
+                          'on') %}
+
+                          Service: !!!
+
+                          {% else %}
+
+                          Non raggiungibile
+
+                          {% endif %}
+                        secondary: ''
+                        icon: mdi:wrench
+                        entity: binary_sensor.116d_check_control_messages
+                        icon_color: >-
+                          {% if
+                          is_state('binary_sensor.116d_condition_based_services',
+                          'off') %}
+
+                          green
+
+                          {% elif
+                          is_state('binary_sensor.116d_condition_based_services',
+                          'on') %}
+
+                          red
+
+                          {% else %}
+
+                          black
+
+                          {% endif %}
+                        tap_action:
+                          action: more-info
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        layout: horizontal
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              height: 60px !important;
+                              border-radius: 25px !important; 
+                              }
+                square: false
+                columns: 1
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: gauge
+                    entity: sensor.116d_remaining_fuel
+                    min: 0
+                    max: 50
+                    needle: true
+                    name: ' '
+                    severity:
+                      green: 25
+                      yellow: 9
+                      red: 0
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 110px !important;
+                          border-radius: 15px !important; 
+                          }
+                  - type: gauge
+                    entity: sensor.116d_remaining_range_total
+                    min: 0
+                    max: 850
+                    name: ' '
+                    needle: true
+                    severity:
+                      green: 425
+                      yellow: 150
+                      red: 0
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 110px !important;
+                          border-radius: 15px !important; 
+                          }
+              - type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: Aria
+                    secondary: ''
+                    icon: mdi:fan
+                    entity: button.116d_activate_air_conditioning
+                    icon_color: purple
+                    layout: vertical
+                    fill_container: true
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 90px !important;
+                          border-radius: 25px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Luci
+                    secondary: ''
+                    icon: mdi:car-light-alert
+                    entity: button.116d_flash_lights
+                    icon_color: purple
+                    layout: vertical
+                    fill_container: true
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 90px !important;
+                          border-radius: 25px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Clacson
+                    secondary: ''
+                    icon: mdi:bullhorn
+                    entity: button.116d_sound_horn
+                    icon_color: purple
+                    layout: vertical
+                    fill_container: true
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 90px !important;
+                          border-radius: 25px !important; 
+                          }
+                square: false
+            columns: 1
+            square: false
+    icon_color: >-
+      {% if is_state('device_tracker.116d', 'away') and
+      is_state('binary_sensor.116d_check_control_messages', 'off') and
+      is_state('binary_sensor.116d_condition_based_services', 'off') %}
+
+      blue
+
+      {% elif is_state('device_tracker.116d', 'away') and
+      is_state('binary_sensor.116d_check_control_messages', 'on') and
+      is_state('binary_sensor.116d_condition_based_services', 'off') %}
+
+      red
+
+      {% elif is_state('device_tracker.116d', 'away') and
+      is_state('binary_sensor.116d_check_control_messages', 'off') and
+      is_state('binary_sensor.116d_condition_based_services', 'on') %}
+
+      orange
+
+      {% elif is_state('device_tracker.116d', 'home') and
+      is_state('binary_sensor.116d_check_control_messages', 'off') and
+      is_state('binary_sensor.116d_condition_based_services', 'on' ) %}
+
+      orange
+
+      {% elif is_state('device_tracker.116d', 'home') and
+      is_state('binary_sensor.116d_check_control_messages', 'on') and
+      is_state('binary_sensor.116d_condition_based_services', 'off') %}
+
+      red
+
+      {% elif is_state('device_tracker.116d', 'unavailable') %}
+
+      black
+
+      {% else %}
+
+      grey
+
+      {% endif %}
+    entity: device_tracker.116d
+    secondary: ''
+    primary: Auto
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 70px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }

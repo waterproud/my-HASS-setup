@@ -1,0 +1,2510 @@
+square: false
+columns: 4
+type: grid
+cards:
+  - type: custom:mushroom-template-card
+    primary: Purificatori
+    secondary: ''
+    icon: >-
+      {% if is_state('fan.mi_air_purifier_3_3h', 'on') and
+      is_state('fan.purificatore_aria', 'on') %}
+
+      mdi:air-purifier
+
+      {% elif is_state('fan.mi_air_purifier_3_3h', 'on') and
+      is_state('fan.purificatore_aria', 'off') %}
+
+      mdi:air-purifier
+
+      {% elif is_state('fan.mi_air_purifier_3_3h', 'off') and
+      is_state('fan.purificatore_aria', 'on') %}
+
+      mdi:air-purifier
+
+      {% else %}
+
+      mdi:air-purifier-off
+
+      {% endif %}
+    icon_color: >-
+      {% if is_state('fan.mi_air_purifier_3_3h', 'on') and
+      is_state('fan.purificatore_aria', 'on') %}
+
+      green
+
+      {% elif is_state('fan.mi_air_purifier_3_3h', 'on') and
+      is_state('fan.purificatore_aria', 'off') %}
+
+      lime
+
+      {% elif is_state('fan.mi_air_purifier_3_3h', 'off') and
+      is_state('fan.purificatore_aria', 'on') %}
+
+      lime
+
+      {% else %}
+
+      grey
+
+      {% endif %}
+    layout: vertical
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Opzioni Purificatori
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px;  
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - type: custom:mushroom-fan-card
+                entity: fan.mi_air_purifier_3_3h
+                icon_animation: true
+                hold_action:
+                  action: more-info
+                double_tap_action:
+                  action: more-info
+                name: Purificatore Sala
+                show_percentage_control: true
+                fill_container: false
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.mi_air_purifier_3_3h_filter_life_remaining
+                    name: Filtro rimasto
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.mi_air_purifier_3_3h_pm2_5
+                    name: PM 2.5
+              - type: custom:mushroom-title-card
+                title: ''
+              - type: custom:mushroom-fan-card
+                entity: fan.purificatore_aria
+                icon_animation: true
+                show_percentage_control: true
+                name: Purificatore camera
+                hold_action:
+                  action: more-info
+                double_tap_action:
+                  action: more-info
+              - type: custom:mushroom-entity-card
+                entity: sensor.purificatore_aria_filter_life
+                name: Filtro rimasto
+                icon: mdi:air-filter
+    badge_color: ''
+    badge_icon: ''
+    hold_action:
+      action: call-service
+      service: fan.set_percentage
+      data:
+        percentage: 66
+      target:
+        entity_id:
+          - fan.mi_air_purifier_3_3h
+          - fan.purificatore_aria
+    double_tap_action:
+      action: call-service
+      service: fan.turn_off
+      data: {}
+      target:
+        entity_id:
+          - fan.mi_air_purifier_3_3h
+          - fan.purificatore_aria
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 85px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                }
+  - type: custom:mushroom-template-card
+    primary: Sala
+    secondary: >-
+      {{states('sensor.temperatura_sala') }}°C  ||
+      {{states('sensor.umidita_sala') }}%
+    icon: mdi:air-conditioner
+    entity: climate.daikin_sala
+    icon_color: |-
+      {% if is_state('climate.daikin_sala', 'cool') %}
+      blue
+      {% elif is_state('climate.daikin_sala', 'heat') %}
+      deep-orange
+      {% elif is_state('climate.daikin_sala', 'dry') %}
+      amber
+      {% elif is_state('climate.daikin_sala', 'fan_only') %}
+      brown
+      {% else %}
+      grey
+      {% endif %}
+    layout: vertical
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Opzioni A/C Sala
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px;  
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - type: custom:mushroom-template-card
+                icon: hue:room-dining
+                entity: sensor.thermal_comfort_sala_perception_2
+                icon_color: >-
+                  {% if is_state('sensor.thermal_comfort_sala_perception_2',
+                  'dry') %}
+
+                  amber
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'comfortable') %}
+
+                  light-green
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'very_comfortable') %}
+
+                  green
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'ok_but_humid') %}
+
+                  cyan
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'somewhat_uncomfortable') %}
+
+                  orange
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'quite_uncomfortable') %}
+
+                  red
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'extremely_uncomfortable') %}
+
+                  pink
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'severely_high') %}
+
+                  pink
+
+                  {% else %}
+
+                  black
+
+                  {% endif %}
+                primary: >-
+                  {% if is_state('sensor.thermal_comfort_sala_perception_2',
+                  'dry') %}
+
+                  Un po' secco
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'comfortable') %}
+
+                  Confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'very_comfortable') %}
+
+                  Molto confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'ok_but_humid') %}
+
+                  Ok ma umido
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'somewhat_uncomfortable') %}
+
+                  Poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'quite_uncomfortable') %}
+
+                  Molto poco confrortevole
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'extremely_uncomfortable') %}
+
+                  Estremamente poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'severely_high') %}
+
+                  Rischio per la salute
+
+                  {% else %}
+
+                  Nessuna informazione disponibile
+
+                  {% endif %}
+                tap_action:
+                  action: more-info
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                secondary: >-
+                  Temperatura percepita: {{
+                  states('sensor.thermal_comfort_sala_heatindex_2') }}°C
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                        height: 55px !important;
+                      }
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.temperatura_sala'') }}°C'
+                    icon: mdi:thermometer-lines
+                    entity: sensor.temperatura_sala
+                    icon_color: >-
+                      {% if ( states( 'sensor.temperatura_sala' ) | float ) >=
+                      28.0 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.temperatura_sala' ) | float ) >=
+                      24.0 and ( states( 'sensor.temperatura_sala' ) | float ) <
+                      28.0%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.temperatura_sala' ) | float ) >=
+                      20.0 and ( states( 'sensor.temperatura_sala' ) | float ) <
+                      24.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.temperatura_sala' ) | float ) >=
+                      18.0 and ( states( 'sensor.temperatura_sala' ) | float ) <
+                      20.0%}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.temperatura_sala' ) | float ) <
+                      18.0 %}
+
+                      blue
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 55px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.umidita_sala'') }}%'
+                    icon: mdi:water-percent
+                    entity: sensor.umidita_sala
+                    icon_color: >-
+                      {% if ( states( 'sensor.umidita_sala' ) | float ) > 80.0
+                      %}
+
+                      blue
+
+                      {% elif ( states( 'sensor.umidita_sala' ) | float ) > 60.0
+                      and ( states( 'sensor.umidita_sala' ) | float ) < 80.0%}
+
+                      light-blue
+
+                      {% elif ( states( 'sensor.umidita_sala' ) | float ) > 40.0
+                      and ( states( 'sensor.umidita_sala' ) | float ) < 60.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.umidita_sala' ) | float ) > 20.0
+                      and ( states( 'sensor.umidita_sala' ) | float ) < 40.0%}
+
+                      amber0
+
+                      {% elif ( states( 'sensor.umidita_sala' ) | float ) < 20.0
+                      %}
+
+                      red
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 55px !important;
+                          }
+              - type: grid
+                cards:
+                  - type: custom:simple-thermostat
+                    entity: climate.daikin_sala
+                    step_size: '0.5'
+                    hide:
+                      temperature: true
+                      state: true
+                    layout:
+                      mode:
+                        icons: true
+                        names: true
+                        headings: false
+                      step: arrow
+                    header: false
+                    control:
+                      hvac:
+                        heat_cool: false
+                      fan: true
+                      swing: true
+                    fallback: 'Off'
+                columns: 1
+                square: false
+              - type: grid
+                cards:
+                  - type: custom:mushroom-title-card
+                    title: ''
+                    subtitle: |-
+                      {% if is_state('timer.timer_30min_hvac_sala', 'active') %}
+                      Timer: attivo 30 minuti
+                      {% elif is_state('timer.timer_1hr_hvac_sala', 'active') %}
+                      Timer: attivo 1 ora
+                      {% elif is_state('timer.timer_2hr_hvac_sala', 'active') %}
+                      Timer: attivo 2 ore
+                      {% else %}
+                      Opzioni Timer:
+                      {% endif %}
+                  - type: custom:timer-bar-card
+                    entities:
+                      - timer.timer_30min_hvac_sala
+                      - timer.timer_1hr_hvac_sala
+                      - timer.timer_2hr_hvac_sala
+                    bar_direction: rtl
+                    invert: true
+                    compressed: true
+                    bar_foreground: linear-gradient(to right, green, yellow,red)
+                    layout: full_row
+                    filter: true
+                    bar_radius: 10px
+                    bar_height: 10px
+                    text_width: 6em
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 20px !important; 
+                          }
+                  - square: false
+                    columns: 4
+                    type: grid
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: ''
+                        secondary: >-
+                          {% if is_state('timer.timer_30min_hvac_sala',
+                          'active') %}
+
+                          30 min
+
+                          {% else %}
+
+                          30 min
+
+                          {% endif %}
+                        icon: mdi:timer
+                        entity: timer.timer_2hr_hvac_sala
+                        icon_color: >-
+                          {% if is_state('timer.timer_30min_hvac_sala',
+                          'active') %}
+
+                          green
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                        tap_action:
+                          action: call-service
+                          service: timer.start
+                          data: {}
+                          target:
+                            entity_id: timer.timer_30min_hvac_sala
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        layout: vertical
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              border-radius: 25px !important;
+                              height: 85px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: ''
+                        secondary: >-
+                          {% if is_state('timer.timer_1hr_hvac_sala', 'active')
+                          %}
+
+                          1 ora
+
+                          {% else %}
+
+                          1 ora
+
+                          {% endif %}
+                        icon: mdi:timer
+                        entity: timer.timer_1hr_hvac_sala
+                        icon_color: >-
+                          {% if is_state('timer.timer_1hr_hvac_sala', 'active')
+                          %}
+
+                          green
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                        tap_action:
+                          action: call-service
+                          service: timer.start
+                          data: {}
+                          target:
+                            entity_id: timer.timer_1hr_hvac_sala
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        layout: vertical
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              border-radius: 25px !important;
+                              height: 85px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: ''
+                        secondary: >-
+                          {% if is_state('timer.timer_2hr_hvac_sala', 'active')
+                          %}
+
+                          2 ore
+
+                          {% else %}
+
+                          2 ore
+
+                          {% endif %}
+                        icon: mdi:timer
+                        entity: timer.timer_2hr_hvac_sala
+                        icon_color: >-
+                          {% if is_state('timer.timer_2hr_hvac_sala', 'active')
+                          %}
+
+                          green
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                        tap_action:
+                          action: call-service
+                          service: timer.start
+                          data: {}
+                          target:
+                            entity_id: timer.timer_2hr_hvac_sala
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        layout: vertical
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              border-radius: 25px !important;
+                              height: 85px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: ''
+                        secondary: Stop
+                        icon: mdi:stop
+                        entity: timer.timer_1hr_hvac_salotto
+                        icon_color: >-
+                          {% if is_state('timer.timer_30min_hvac_sala',
+                          'active') or is_state('timer.timer_1hr_hvac_sala',
+                          'active') or is_state('timer.timer_2hr_hvac_sala',
+                          'active') %}
+
+                          red
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                        tap_action:
+                          action: call-service
+                          service: timer.cancel
+                          data: {}
+                          target:
+                            entity_id:
+                              - timer.timer_2hr_hvac_sala
+                              - timer.timer_1hr_hvac_sala
+                              - timer.timer_30min_hvac_sala
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        layout: vertical
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              border-radius: 25px !important;
+                              height: 85px !important;
+                              }
+                square: false
+                columns: 1
+    badge_color: >-
+      {% if is_state('input_boolean.clima_automatico_nodered', 'on') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'on') %}
+
+      teal
+
+      {% elif is_state('input_boolean.clima_automatico_nodered', 'on') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'off') %}
+
+      amber
+
+      {% elif is_state('input_boolean.clima_automatico_nodered', 'off') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'on') %}
+
+      blue-grey
+
+      {% else %}
+
+      red
+
+      {% endif %}
+    badge_icon: >-
+      {% if is_state('input_boolean.clima_automatico_nodered', 'on') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'on') %}
+
+      mdi:thermometer-auto
+
+      {% elif is_state('input_boolean.clima_automatico_nodered', 'on') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'off') %}
+
+      mdi:sun-thermometer-outline
+
+      {% elif is_state('input_boolean.clima_automatico_nodered', 'off') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'on') %}
+
+      mdi:weather-night
+
+      {% else %}
+
+      mdi:thermometer-auto
+
+      {% endif %}
+    hold_action:
+      action: toggle
+    double_tap_action:
+      action: toggle
+    multiline_secondary: false
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 85px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }
+  - type: custom:mushroom-template-card
+    primary: Salotto
+    secondary: >-
+      {{states('sensor.temperatura_salotto') }}°C  ||
+      {{states('sensor.umidita_salotto') }}%
+    icon: mdi:air-conditioner
+    entity: climate.daikin_salotto
+    icon_color: |-
+      {% if is_state('climate.daikin_salotto', 'cool') %}
+      blue
+      {% elif is_state('climate.daikin_salotto', 'heat') %}
+      deep-orange
+      {% elif is_state('climate.daikin_salotto', 'dry') %}
+      amber
+      {% elif is_state('climate.daikin_salotto', 'fan_only') %}
+      brown
+      {% else %}
+      grey
+      {% endif %}
+    layout: vertical
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Opzioni A/C Salotto
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px;  
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - type: custom:mushroom-template-card
+                icon: hue:room-living
+                entity: sensor.thermal_comfort_salotto_perception
+                icon_color: >-
+                  {% if is_state('sensor.thermal_comfort_salotto_perception',
+                  'dry') %}
+
+                  amber
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'comfortable') %}
+
+                  light-green
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'very_comfortable') %}
+
+                  green
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'ok_but_humid') %}
+
+                  cyan
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'somewhat_uncomfortable') %}
+
+                  orange
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'quite_uncomfortable') %}
+
+                  red
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'extremely_uncomfortable') %}
+
+                  pink
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'severely_high') %}
+
+                  pink
+
+                  {% else %}
+
+                  black
+
+                  {% endif %}
+                primary: >-
+                  {% if is_state('sensor.thermal_comfort_salotto_perception',
+                  'dry') %}
+
+                  Un po' secco
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'comfortable') %}
+
+                  Confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'very_comfortable') %}
+
+                  Molto confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'ok_but_humid') %}
+
+                  Ok ma umido
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'somewhat_uncomfortable') %}
+
+                  Poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'quite_uncomfortable') %}
+
+                  Molto poco confrortevole
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'extremely_uncomfortable') %}
+
+                  Estremamente poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'severely_high') %}
+
+                  Rischio per la salute
+
+                  {% else %}
+
+                  Nessuna informazione disponibile
+
+                  {% endif %}
+                tap_action:
+                  action: more-info
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                secondary: >-
+                  Temperatura percepita: {{
+                  states('sensor.thermal_comfort_salotto_heatindex') }}°C
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                        height: 55px !important;
+                      }
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.temperatura_salotto'') }}°C'
+                    icon: mdi:thermometer-lines
+                    entity: sensor.temperatura_salotto
+                    icon_color: >-
+                      {% if ( states( 'sensor.temperatura_salotto' ) | float )
+                      >= 28.0
+                       %}
+
+                       red
+
+                       {% elif ( states( 'sensor.temperatura_salotto' ) | float ) >= 24.0
+                       and ( states( 'sensor.temperatura_salotto' ) | float ) < 28.0%}
+
+                       orange
+
+                       {% elif ( states( 'sensor.temperatura_salotto' ) | float ) >= 20.0
+                       and ( states( 'sensor.temperatura_salotto' ) | float ) < 24.0%}
+
+                       green
+
+                       {% elif ( states( 'sensor.temperatura_salotto' ) | float ) >= 18.0
+                       and ( states( 'sensor.temperatura_salotto' ) | float ) < 20.0%}
+
+                       light-green
+
+                       {% elif ( states( 'sensor.temperatura_salotto' ) | float ) < 18.0
+                       %}
+
+                       blue
+
+                       {% else %}
+
+                       black
+
+                       {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 55px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.umidita_salotto'') }}%'
+                    icon: mdi:water-percent
+                    entity: sensor.umidita_salotto
+                    icon_color: >-
+                      {% if ( states( 'sensor.umidita_salotto' ) | float ) >
+                      80.0 %}
+
+                      blue
+
+                      {% elif ( states( 'sensor.umidita_salotto' ) | float ) >
+                      60.0 and ( states( 'sensor.umidita_salotto' ) | float ) <
+                      80.0%}
+
+                      light-blue
+
+                      {% elif ( states( 'sensor.umidita_salotto' ) | float ) >
+                      40.0 and ( states( 'sensor.umidita_salotto' ) | float ) <
+                      60.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.umidita_salotto' ) | float ) >
+                      20.0 and ( states( 'sensor.umidita_salotto' ) | float ) <
+                      40.0%}
+
+                      amber
+
+                      {% elif ( states( 'sensor.umidita_salotto' ) | float ) <
+                      20.0 %}
+
+                      red
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 55px !important;
+                          }
+              - type: grid
+                cards:
+                  - type: custom:simple-thermostat
+                    entity: climate.daikin_salotto
+                    step_size: '0.5'
+                    hide:
+                      temperature: true
+                      state: true
+                    layout:
+                      mode:
+                        icons: true
+                        names: true
+                        headings: false
+                      step: arrow
+                    header: false
+                    control:
+                      hvac:
+                        heat_cool: false
+                      fan: true
+                      swing: true
+                    fallback: 'Off'
+                columns: 1
+                square: false
+              - type: grid
+                cards:
+                  - type: custom:mushroom-title-card
+                    title: ''
+                    subtitle: >-
+                      {% if is_state('timer.timer_30min_hvac_salotto', 'active')
+                      %}
+
+                      Timer: attivo 30 minuti
+
+                      {% elif is_state('timer.timer_1hr_hvac_salotto', 'active')
+                      %}
+
+                      Timer: attivo 1 ora
+
+                      {% elif is_state('timer.timer_2hr_hvac_salotto', 'active')
+                      %}
+
+                      Timer: attivo 2 ore
+
+                      {% else %}
+
+                      Opzioni Timer:
+
+                      {% endif %}
+                  - type: custom:timer-bar-card
+                    entities:
+                      - timer.timer_30min_hvac_salotto
+                      - timer.timer_1hr_hvac_salotto
+                      - timer.timer_2hr_hvac_salotto
+                    bar_direction: rtl
+                    invert: true
+                    compressed: true
+                    bar_foreground: linear-gradient(to right, green, yellow,red)
+                    layout: full_row
+                    filter: true
+                    bar_radius: 10px
+                    bar_height: 10px
+                    text_width: 6em
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 20px !important; 
+                          }
+                  - square: false
+                    columns: 4
+                    type: grid
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: ''
+                        secondary: >-
+                          {% if is_state('timer.timer_30min_hvac_salotto',
+                          'active') %}
+
+                          30 min
+
+                          {% else %}
+
+                          30 min
+
+                          {% endif %}
+                        icon: mdi:timer
+                        entity: timer.timer_2hr_hvac_salotto
+                        icon_color: >-
+                          {% if is_state('timer.timer_30min_hvac_salotto',
+                          'active') %}
+
+                          green
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                        tap_action:
+                          action: call-service
+                          service: timer.start
+                          data: {}
+                          target:
+                            entity_id: timer.timer_30min_hvac_salotto
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        layout: vertical
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              border-radius: 25px !important;
+                              height: 85px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: ''
+                        secondary: >-
+                          {% if is_state('timer.timer_1hr_hvac_salotto',
+                          'active') %}
+
+                          1 ora
+
+                          {% else %}
+
+                          1 ora
+
+                          {% endif %}
+                        icon: mdi:timer
+                        entity: timer.timer_1hr_hvac_salotto
+                        icon_color: >-
+                          {% if is_state('timer.timer_1hr_hvac_salotto',
+                          'active') %}
+
+                          green
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                        tap_action:
+                          action: call-service
+                          service: timer.start
+                          data: {}
+                          target:
+                            entity_id: timer.timer_1hr_hvac_salotto
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        layout: vertical
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              border-radius: 25px !important;
+                              height: 85px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: ''
+                        secondary: >-
+                          {% if is_state('timer.timer_2hr_hvac_salotto',
+                          'active') %}
+
+                          2 ore
+
+                          {% else %}
+
+                          2 ore
+
+                          {% endif %}
+                        icon: mdi:timer
+                        entity: timer.timer_2hr_hvac_salotto
+                        icon_color: >-
+                          {% if is_state('timer.timer_2hr_hvac_salotto',
+                          'active') %}
+
+                          green
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                        tap_action:
+                          action: call-service
+                          service: timer.start
+                          data: {}
+                          target:
+                            entity_id: timer.timer_2hr_hvac_salotto
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        layout: vertical
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              border-radius: 25px !important;
+                              height: 85px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: ''
+                        secondary: Stop
+                        icon: mdi:stop
+                        entity: timer.timer_1hr_hvac_salotto
+                        icon_color: >-
+                          {% if is_state('timer.timer_30min_hvac_salotto',
+                          'active') or is_state('timer.timer_1hr_hvac_salotto',
+                          'active') or is_state('timer.timer_2hr_hvac_salotto',
+                          'active') %}
+
+                          red
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                        tap_action:
+                          action: call-service
+                          service: timer.cancel
+                          data: {}
+                          target:
+                            entity_id:
+                              - timer.timer_2hr_hvac_salotto
+                              - timer.timer_1hr_hvac_salotto
+                              - timer.timer_30min_hvac_salotto
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        layout: vertical
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                              border-radius: 25px !important;
+                              height: 85px !important;
+                              }
+                square: false
+                columns: 1
+    badge_color: >-
+      {% if is_state('input_boolean.clima_automatico_nodered', 'on') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'on') %}
+
+      teal
+
+      {% elif is_state('input_boolean.clima_automatico_nodered', 'on') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'off') %}
+
+      amber
+
+      {% elif is_state('input_boolean.clima_automatico_nodered', 'off') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'on') %}
+
+      blue-grey
+
+      {% else %}
+
+      red
+
+      {% endif %}
+    badge_icon: >-
+      {% if is_state('input_boolean.clima_automatico_nodered', 'on') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'on') %}
+
+      mdi:thermometer-auto
+
+      {% elif is_state('input_boolean.clima_automatico_nodered', 'on') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'off') %}
+
+      mdi:sun-thermometer-outline
+
+      {% elif is_state('input_boolean.clima_automatico_nodered', 'off') and
+      is_state('input_boolean.clima_automatico_notte_nodered', 'on') %}
+
+      mdi:weather-night
+
+      {% else %}
+
+      mdi:thermometer-auto
+
+      {% endif %}
+    fill_container: false
+    multiline_secondary: false
+    hold_action:
+      action: toggle
+    double_tap_action:
+      action: toggle
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 85px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }
+  - type: custom:mushroom-template-card
+    icon: |-
+      {% if is_state('weather.accuweather', 'partlycloudy') %}
+      mdi:weather-partly-cloudy
+      {% elif is_state('weather.accuweather', 'cloudy') %}
+      mdi:weather-cloudy
+      {% elif is_state('weather.accuweather', 'clear-night') %}
+      mdi:weather-night
+      {% elif is_state('weather.accuweather', 'exceptional') %}
+      mdi:sun-wireless-outline
+      {% elif is_state('weather.accuweather', 'sunny') %}
+      mdi:weather-sunny
+      {% elif is_state('weather.accuweather', 'fog') %}
+      mdi:weather-fog
+      {% elif is_state('weather.accuweather', 'hail') %}
+      mdi:weather-hail
+      {% elif is_state('weather.accuweather', 'rainy') %}
+      mdi:weather-rainy
+      {% elif is_state('weather.accuweather', 'pouring') %}
+      mdi:weather-pouring
+      {% elif is_state('weather.accuweather', 'snowy') %}
+      mdi:weather-snowy
+      {% elif is_state('weather.accuweather', 'snowy-rainy') %}
+      mdi:weather-snowy-rainy
+      {% elif is_state('weather.accuweather', 'windy') %}
+      mdi:weather-windy
+      {% elif is_state('weather.accuweather', 'windy-variant') %}
+      mdi:weather-windy-variant
+      {% elif is_state('weather.accuweather', 'lightning') %}
+      mdi:weather-lightning
+      {% elif is_state('weather.accuweather', 'lightning-rainy') %}
+      mdi:weather-lightning-rainy
+      {% else %}
+      mdi:weather-hurricane
+      {% endif %}
+    layout: vertical
+    icon_color: >-
+      {% if ( states( 'sensor.temperatura_casa' ) | float ) >= 29.0 %}
+
+      red
+
+      {% elif ( states( 'sensor.temperatura_casa' ) | float ) >= 24.0 and (
+      states( 'sensor.temperatura_casa' ) | float ) < 29.0%}
+
+      orange
+
+      {% elif ( states( 'sensor.temperatura_casa' ) | float ) >= 20.0 and (
+      states( 'sensor.temperatura_casa' ) | float ) < 24.0%}
+
+      green
+
+      {% elif ( states( 'sensor.temperatura_casa' ) | float ) >= 18.0 and (
+      states( 'sensor.temperatura_casa' ) | float ) < 20.0%}
+
+      light-green
+
+      {% elif ( states( 'sensor.temperatura_casa' ) | float ) < 18.0 %}
+
+      blue
+
+      {% else %}
+
+      black
+
+      {% endif %}
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Dettagli Clima
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px; 
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - type: custom:mushroom-template-card
+                primary: |-
+                  {% if is_state('weather.accuweather', 'partlycloudy') %}
+                  Parzialmente Nuvoloso
+                  {% elif is_state('weather.accuweather', 'cloudy') %}
+                  Nuvoloso
+                  {% elif is_state('weather.accuweather', 'clear-night') %}
+                  Notte Serena
+                  {% elif is_state('weather.accuweather', 'exceptional') %}
+                  Eccezionale
+                  {% elif is_state('weather.accuweather', 'sunny') %}
+                  Soleggiato
+                  {% elif is_state('weather.accuweather', 'fog') %}
+                  Nebbie Sparse
+                  {% elif is_state('weather.accuweather', 'hail') %}
+                  !!! Grandine !!!
+                  {% elif is_state('weather.accuweather', 'rainy') %}
+                  Precipitazioni
+                  {% elif is_state('weather.accuweather', 'pouring') %}
+                  Forti Precipitazioni
+                  {% elif is_state('weather.accuweather', 'snowy') %}
+                  Nevicate
+                  {% elif is_state('weather.accuweather', 'snowy-rainy') %}
+                  Nevicate con Pioggia
+                  {% elif is_state('weather.accuweather', 'windy') %}
+                  Vento
+                  {% elif is_state('weather.accuweather', 'windy-variant') %}
+                  Vento con Maltempo
+                  {% elif is_state('weather.accuweather', 'lightning') %}
+                  Temporali
+                  {% elif is_state('weather.accuweather', 'lightning-rainy') %}
+                  Temporali con precipitazioni
+                  {% else %}
+                  Non Disponibile
+                  {% endif %}
+                icon: |-
+                  {% if is_state('weather.accuweather', 'partlycloudy') %}
+                  mdi:weather-partly-cloudy
+                  {% elif is_state('weather.accuweather', 'cloudy') %}
+                  mdi:weather-cloudy
+                  {% elif is_state('weather.accuweather', 'clear-night') %}
+                  mdi:weather-night
+                  {% elif is_state('weather.accuweather', 'exceptional') %}
+                  mdi:sun-wireless-outline
+                  {% elif is_state('weather.accuweather', 'sunny') %}
+                  mdi:weather-sunny
+                  {% elif is_state('weather.accuweather', 'fog') %}
+                  mdi:weather-fog
+                  {% elif is_state('weather.accuweather', 'hail') %}
+                  mdi:weather-hail
+                  {% elif is_state('weather.accuweather', 'rainy') %}
+                  mdi:weather-rainy
+                  {% elif is_state('weather.accuweather', 'pouring') %}
+                  mdi:weather-pouring
+                  {% elif is_state('weather.accuweather', 'snowy') %}
+                  mdi:weather-snowy
+                  {% elif is_state('weather.accuweather', 'snowy-rainy') %}
+                  mdi:weather-snowy-rainy
+                  {% elif is_state('weather.accuweather', 'windy') %}
+                  mdi:weather-windy
+                  {% elif is_state('weather.accuweather', 'windy-variant') %}
+                  mdi:weather-windy-variant
+                  {% elif is_state('weather.accuweather', 'lightning') %}
+                  mdi:weather-lightning
+                  {% elif is_state('weather.accuweather', 'lightning-rainy') %}
+                  mdi:weather-lightning-rainy
+                  {% else %}
+                  mdi:weather-hurricane
+                  {% endif %}
+                entity: weather.accuweather
+                icon_color: |-
+                  {% if is_state('weather.accuweather', 'partlycloudy') %}
+                  grey
+                  {% elif is_state('weather.accuweather', 'cloudy') %}
+                  grey
+                  {% elif is_state('weather.accuweather', 'clear-night') %}
+                  blue-grey
+                  {% elif is_state('weather.accuweather', 'exceptional') %}
+                  yellow
+                  {% elif is_state('weather.accuweather', 'sunny') %}
+                  yellow
+                  {% elif is_state('weather.accuweather', 'fog') %}
+                  grey
+                  {% elif is_state('weather.accuweather', 'hail') %}
+                  red
+                  {% elif is_state('weather.accuweather', 'rainy') %}
+                  cyan
+                  {% elif is_state('weather.accuweather', 'pouring') %}
+                  blue
+                  {% elif is_state('weather.accuweather', 'snowy') %}
+                  white
+                  {% elif is_state('weather.accuweather', 'snowy-rainy') %}
+                  light-blue
+                  {% elif is_state('weather.accuweather', 'windy') %}
+                  brown
+                  {% elif is_state('weather.accuweather', 'windy-variant') %}
+                  brown
+                  {% elif is_state('weather.accuweather', 'lightning') %}
+                  purple
+                  {% elif is_state('weather.accuweather', 'lightning-rainy') %}
+                  indigo
+                  {% else %}
+                  black
+                  {% endif %}
+                tap_action:
+                  action: more-info
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                layout: horizontal
+                secondary: >-
+                  Temperatura: {{ state_attr('weather.accuweather',
+                  'temperature') }}°C || Umidità: {{
+                  state_attr('weather.accuweather', 'humidity') }}%
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                        height: 65px !important;
+                      }
+                      :host {
+                            --mush-icon-size: 50px;
+                            --mush-card-primary-font-size: 16px;
+                            --mush-card-primary-line-height: 1.5;
+                            }
+              - type: custom:mushroom-title-card
+                title: ''
+                subtitle: ''
+                alignment: center
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                        height: 0px !important;
+                      }
+                      :host {
+                            --mush-spacing: 2px !important;
+                            --mush-title-spacing: 1px;
+                            --mush-title-line-height: 0.1 !important;
+                            }
+              - type: custom:mushroom-template-card
+                icon: hue:room-dining
+                entity: sensor.thermal_comfort_sala_perception_2
+                icon_color: >-
+                  {% if is_state('sensor.thermal_comfort_sala_perception_2',
+                  'dry') %}
+
+                  amber
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'comfortable') %}
+
+                  light-green
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'very_comfortable') %}
+
+                  green
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'ok_but_humid') %}
+
+                  cyan
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'somewhat_uncomfortable') %}
+
+                  orange
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'quite_uncomfortable') %}
+
+                  red
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'extremely_uncomfortable') %}
+
+                  pink
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'severely_high') %}
+
+                  pink
+
+                  {% else %}
+
+                  black
+
+                  {% endif %}
+                primary: >-
+                  {% if is_state('sensor.thermal_comfort_sala_perception_2',
+                  'dry') %}
+
+                  Clima Sala: Un po' secco
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'comfortable') %}
+
+                  Clima Sala: Confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'very_comfortable') %}
+
+                  Clima Sala: Molto confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'ok_but_humid') %}
+
+                  Clima Sala: Ok ma umido
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'somewhat_uncomfortable') %}
+
+                  Clima Sala: Poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'quite_uncomfortable') %}
+
+                  Clima Sala: Molto poco confrortevole
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'extremely_uncomfortable') %}
+
+                  Clima Sala: Estremamente poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_sala_perception_2',
+                  'severely_high') %}
+
+                  Clima Sala: Rischio per la salute
+
+                  {% else %}
+
+                  Nessuna informazione disponibile
+
+                  {% endif %}
+                tap_action:
+                  action: more-info
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                secondary: >-
+                  Percepito: {{
+                  states('sensor.thermal_comfort_sala_heatindex_2') }}°C
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                        height: 50px !important;
+                      }
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.temperatura_sala'') }}°C'
+                    icon: mdi:thermometer-lines
+                    entity: sensor.temperatura_sala
+                    icon_color: >-
+                      {% if ( states( 'sensor.temperatura_sala' ) | float ) >=
+                      29.0 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.temperatura_sala' ) | float ) >=
+                      24.0 and ( states( 'sensor.temperatura_sala' ) | float ) <
+                      29.0%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.temperatura_sala' ) | float ) >=
+                      20.0 and ( states( 'sensor.temperatura_sala' ) | float ) <
+                      24.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.temperatura_sala' ) | float ) >=
+                      18.0 and ( states( 'sensor.temperatura_sala' ) | float ) <
+                      20.0%}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.temperatura_sala' ) | float ) <
+                      18.0 %}
+
+                      blue
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.umidita_sala'') }}%'
+                    icon: mdi:water-percent
+                    entity: sensor.umidita_sala
+                    icon_color: >-
+                      {% if ( states( 'sensor.umidita_sala' ) | float ) >= 80.0
+                      %}
+
+                      blue
+
+                      {% elif ( states( 'sensor.umidita_sala' ) | float ) >=
+                      60.0 and ( states( 'sensor.umidita_sala' ) | float ) <
+                      80.0%}
+
+                      light-blue
+
+                      {% elif ( states( 'sensor.umidita_sala' ) | float ) >=
+                      40.0 and ( states( 'sensor.umidita_sala' ) | float ) <
+                      60.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.umidita_sala' ) | float ) >=
+                      20.0 and ( states( 'sensor.umidita_sala' ) | float ) <
+                      40.0%}
+
+                      amber
+
+                      {% elif ( states( 'sensor.umidita_sala' ) | float ) < 20.0
+                      %}
+
+                      red
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+              - type: custom:mushroom-title-card
+                title: ''
+                subtitle: ''
+                alignment: center
+              - type: custom:mushroom-template-card
+                icon: hue:room-living
+                entity: sensor.thermal_comfort_salotto_perception
+                icon_color: >-
+                  {% if is_state('sensor.thermal_comfort_salotto_perception',
+                  'dry') %}
+
+                  amber
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'comfortable') %}
+
+                  light-green
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'very_comfortable') %}
+
+                  green
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'ok_but_humid') %}
+
+                  cyan
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'somewhat_uncomfortable') %}
+
+                  orange
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'quite_uncomfortable') %}
+
+                  red
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'extremely_uncomfortable') %}
+
+                  pink
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'severely_high') %}
+
+                  pink
+
+                  {% else %}
+
+                  black
+
+                  {% endif %}
+                primary: >-
+                  {% if is_state('sensor.thermal_comfort_salotto_perception',
+                  'dry') %}
+
+                  Clima Salotto: Un po' secco
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'comfortable') %}
+
+                  Clima Salotto: Confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'very_comfortable') %}
+
+                  Clima Salotto: Molto confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'ok_but_humid') %}
+
+                  Clima Salotto: Ok ma umido
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'somewhat_uncomfortable') %}
+
+                  Clima Salotto: Poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'quite_uncomfortable') %}
+
+                  Clima Salotto: Molto poco confrortevole
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'extremely_uncomfortable') %}
+
+                  Clima Salotto: Estremamente poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_salotto_perception',
+                  'severely_high') %}
+
+                  Clima Salotto: Rischio per la salute
+
+                  {% else %}
+
+                  Nessuna informazione disponibile
+
+                  {% endif %}
+                tap_action:
+                  action: more-info
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                secondary: >-
+                  Percepito: {{
+                  states('sensor.thermal_comfort_salotto_heatindex') }}°C
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                        height: 50px !important;
+                      }
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.temperatura_salotto'') }}°C'
+                    icon: mdi:thermometer-lines
+                    entity: sensor.temperatura_salotto
+                    icon_color: >-
+                      {% if ( states( 'sensor.temperatura_salotto' ) | float )
+                      >= 29.0 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.temperatura_salotto' ) | float )
+                      >= 24.0 and ( states( 'sensor.temperatura_salotto' ) |
+                      float ) < 29.0%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.temperatura_salotto' ) | float )
+                      >= 20.0 and ( states( 'sensor.temperatura_salotto' ) |
+                      float ) < 24.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.temperatura_salotto' ) | float )
+                      >= 18.0 and ( states( 'sensor.temperatura_salotto' ) |
+                      float ) < 20.0%}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.temperatura_salotto' ) | float )
+                      < 18.0 %}
+
+                      blue
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    secondary: ''
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.umidita_salotto'') }}%'
+                    icon: mdi:water-percent
+                    entity: sensor.umidita_salotto
+                    icon_color: >-
+                      {% if ( states( 'sensor.umidita_salotto' ) | float ) >=
+                      80.0 %}
+
+                      blue
+
+                      {% elif ( states( 'sensor.umidita_salotto' ) | float ) >=
+                      60.0 and ( states( 'sensor.umidita_salotto' ) | float ) <
+                      80.0%}
+
+                      light-blue
+
+                      {% elif ( states( 'sensor.umidita_salotto' ) | float ) >=
+                      40.0 and ( states( 'sensor.umidita_salotto' ) | float ) <
+                      60.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.umidita_salotto' ) | float ) >=
+                      20.0 and ( states( 'sensor.umidita_salotto' ) | float ) <
+                      40.0%}
+
+                      amber
+
+                      {% elif ( states( 'sensor.umidita_salotto' ) | float ) <
+                      20.0 %}
+
+                      red
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+              - type: custom:mushroom-title-card
+                title: ''
+                subtitle: ''
+                alignment: center
+              - type: custom:mushroom-template-card
+                icon: hue:room-bedroom
+                entity: sensor.thermal_comfort_camera_perception
+                icon_color: >-
+                  {% if is_state('sensor.thermal_comfort_camera_perception',
+                  'dry') %}
+
+                  amber
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'comfortable') %}
+
+                  light-green
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'very_comfortable') %}
+
+                  green
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'ok_but_humid') %}
+
+                  cyan
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'somewhat_uncomfortable') %}
+
+                  orange
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'quite_uncomfortable') %}
+
+                  red
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'extremely_uncomfortable') %}
+
+                  pink
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'severely_high') %}
+
+                  pink
+
+                  {% else %}
+
+                  black
+
+                  {% endif %}
+                primary: >-
+                  {% if is_state('sensor.thermal_comfort_camera_perception',
+                  'dry') %}
+
+                  Clima Camera: Un po' secco
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'comfortable') %}
+
+                  Clima Camera: Confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'very_comfortable') %}
+
+                  Clima Camera: Molto confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'ok_but_humid') %}
+
+                  Clima Camera: Ok ma umido
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'somewhat_uncomfortable') %}
+
+                  Clima Camera: Poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'quite_uncomfortable') %}
+
+                  Clima Camera: Molto poco confrortevole
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'extremely_uncomfortable') %}
+
+                  Clima Camera: Estremamente poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_camera_perception',
+                  'severely_high') %}
+
+                  Clima Camera: Rischio per la salute
+
+                  {% else %}
+
+                  Nessuna informazione disponibile
+
+                  {% endif %}
+                tap_action:
+                  action: more-info
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                secondary: >-
+                  Percepito: {{
+                  states('sensor.thermal_comfort_camera_heatindex') }}°C
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                        height: 50px !important;
+                      }
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.temperatura_camera'') }}°C'
+                    icon: mdi:thermometer-lines
+                    entity: sensor.temperatura_camera
+                    icon_color: >-
+                      {% if ( states( 'sensor.temperatura_camera' ) | float ) >=
+                      29.0 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.temperatura_camera' ) | float )
+                      >= 24.0 and ( states( 'sensor.temperatura_camera' ) |
+                      float ) < 29.0%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.temperatura_camera' ) | float )
+                      >= 20.0 and ( states( 'sensor.temperatura_camera' ) |
+                      float ) < 24.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.temperatura_camera' ) | float )
+                      >= 18.0 and ( states( 'sensor.temperatura_camera' ) |
+                      float ) < 20.0%}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.temperatura_camera' ) | float )
+                      < 18.0 %}
+
+                      blue
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.umidita_camera'') }}%'
+                    icon: mdi:water-percent
+                    entity: sensor.umidita_camera
+                    icon_color: >-
+                      {% if ( states( 'sensor.umidita_camera' ) | float ) >=
+                      80.0 %}
+
+                      blue
+
+                      {% elif ( states( 'sensor.umidita_camera' ) | float ) >=
+                      60.0 and ( states( 'sensor.umidita_camera' ) | float ) <
+                      80.0%}
+
+                      light-blue
+
+                      {% elif ( states( 'sensor.umidita_camera' ) | float ) >=
+                      40.0 and ( states( 'sensor.umidita_camera' ) | float ) <
+                      60.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.umidita_camera' ) | float ) >=
+                      20.0 and ( states( 'sensor.umidita_camera' ) | float ) <
+                      40.0%}
+
+                      amber
+
+                      {% elif ( states( 'sensor.umidita_camera' ) | float ) <
+                      20.0 %}
+
+                      red
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    secondary: ''
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+              - type: custom:mushroom-title-card
+                title: ''
+                subtitle: ''
+                alignment: center
+              - type: custom:mushroom-template-card
+                icon: hue:room-bathroom
+                entity: sensor.thermal_comfort_bagno_perception
+                icon_color: >-
+                  {% if is_state('sensor.thermal_comfort_bagno_perception',
+                  'dry') %}
+
+                  amber
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'comfortable') %}
+
+                  light-green
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'very_comfortable') %}
+
+                  green
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'ok_but_humid') %}
+
+                  cyan
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'somewhat_uncomfortable') %}
+
+                  orange
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'quite_uncomfortable') %}
+
+                  red
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'extremely_uncomfortable') %}
+
+                  pink
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'severely_high') %}
+
+                  pink
+
+                  {% else %}
+
+                  black
+
+                  {% endif %}
+                primary: >-
+                  {% if is_state('sensor.thermal_comfort_bagno_perception',
+                  'dry') %}
+
+                  Clima Bagno: Un po' secco
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'comfortable') %}
+
+                  Clima Bagno: Confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'very_comfortable') %}
+
+                  Clima Bagno: Molto confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'ok_but_humid') %}
+
+                  Clima Bagno: Ok ma umido
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'somewhat_uncomfortable') %}
+
+                  Clima Bagno: Poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'quite_uncomfortable') %}
+
+                  Clima Bagno: Molto poco confrortevole
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'extremely_uncomfortable') %}
+
+                  Clima Bagno: Estremamente poco confortevole
+
+                  {% elif is_state('sensor.thermal_comfort_bagno_perception',
+                  'severely_high') %}
+
+                  Clima Bagno: Rischio per la salute
+
+                  {% else %}
+
+                  Nessuna informazione disponibile
+
+                  {% endif %}
+                tap_action:
+                  action: more-info
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                secondary: >-
+                  Percepito: {{ states('sensor.thermal_comfort_bagno_heatindex')
+                  }}°C
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                        height: 50px !important;
+                      }
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.0x00158d00075a7f85_temperature'') }}°C'
+                    icon: mdi:thermometer-lines
+                    entity: sensor.0x00158d00075a7f85_temperature
+                    icon_color: >-
+                      {% if ( states( 'sensor.0x00158d00075a7f85_temperature' )
+                      | float ) >= 26.0 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.0x00158d00075a7f85_temperature'
+                      ) | float ) >= 24.0 and ( states(
+                      'sensor.0x00158d00075a7f85_temperature' ) | float ) <
+                      26.0%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.0x00158d00075a7f85_temperature'
+                      ) | float ) >= 20.0 and ( states(
+                      'sensor.0x00158d00075a7f85_temperature' ) | float ) <
+                      24.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.0x00158d00075a7f85_temperature'
+                      ) | float ) >= 18.0 and ( states(
+                      'sensor.0x00158d00075a7f85_temperature' ) | float ) <
+                      20.0%}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.0x00158d00075a7f85_temperature'
+                      ) | float ) < 18.0 %}
+
+                      blue
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.0x00158d00075a7f85_humidity'') }}%'
+                    icon: mdi:water-percent
+                    entity: sensor.0x00158d00075a7f85_humidity
+                    icon_color: >-
+                      {% if ( states( 'sensor.0x00158d00075a7f85_humidity' ) |
+                      float ) >= 80.0 %}
+
+                      blue
+
+                      {% elif ( states( 'sensor.0x00158d00075a7f85_humidity' ) |
+                      float ) >= 60.0 and ( states(
+                      'sensor.0x00158d00075a7f85_humidity' ) | float ) < 80.0%}
+
+                      light-blue
+
+                      {% elif ( states( 'sensor.0x00158d00075a7f85_humidity' ) |
+                      float ) >= 40.0 and ( states(
+                      'sensor.0x00158d00075a7f85_humidity' ) | float ) < 60.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.0x00158d00075a7f85_humidity' ) |
+                      float ) >= 20.0 and ( states(
+                      'sensor.0x00158d00075a7f85_humidity' ) | float ) < 40.0%}
+
+                      amber
+
+                      {% elif ( states( 'sensor.0x00158d00075a7f85_humidity' ) |
+                      float ) < 20.0 %}
+
+                      red
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+              - type: custom:mushroom-title-card
+                title: ''
+                subtitle: ''
+                alignment: center
+              - square: false
+                columns: 3
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.temperatura_frigo_corretta'') }}°C'
+                    icon: mdi:snowflake
+                    entity: sensor.temperatura_frigo_corretta
+                    icon_color: >-
+                      {% if ( states( 'sensor.temperatura_frigo_corretta' ) |
+                      float ) >= 9.00 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.temperatura_frigo_corretta' ) |
+                      float ) >= 7.00 and ( states(
+                      'sensor.temperatura_frigo_corretta' ) | float ) < 9.00%}
+
+                      cyan
+
+                      {% elif ( states( 'sensor.temperatura_frigo_corretta' ) |
+                      float ) < 7.0 %}
+
+                      blue
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    layout: horizontal
+                    secondary: '{{ states(''sensor.0x00158d00075a7f41_humidity'') }}%'
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+                          :host {
+                                --mush-icon-size: 35px;
+                                --mush-card-primary-font-size: 12px;
+                                }
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.0x00158d0007df5ba4_temperature'') }}°C'
+                    icon: mdi:snowflake-variant
+                    entity: sensor.0x00158d0007df5ba4_temperature
+                    icon_color: >-
+                      {% if ( states( 'sensor.0x00158d0007df5ba4_temperature' )
+                      | float ) >= -5.00 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.0x00158d0007df5ba4_temperature'
+                      ) | float ) >= -14.00 and ( states(
+                      'sensor.0x00158d0007df5ba4_temperature' ) | float ) <
+                      -5.00%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.0x00158d0007df5ba4_temperature'
+                      ) | float ) < -14.0 %}
+
+                      blue
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    layout: horizontal
+                    secondary: '{{ states(''sensor.0x00158d0007df5ba4_humidity'') }}%'
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+                          :host {
+                                --mush-icon-size: 35px;
+                                --mush-card-primary-font-size: 12px;
+                                }
+                  - type: custom:mushroom-template-card
+                    primary: '{{ states(''sensor.sonoff_a48001620f_temperature'') }}°C'
+                    icon: hue:room-carport
+                    entity: sensor.sonoff_a48001620f_temperature
+                    icon_color: >-
+                      {% if ( states( 'sensor.sonoff_a48001620f_temperature' ) |
+                      float ) >= 26.0 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.sonoff_a48001620f_temperature' )
+                      | float ) >= 24.0 and ( states(
+                      'sensor.sonoff_a48001620f_temperature' ) | float ) <
+                      26.0%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.sonoff_a48001620f_temperature' )
+                      | float ) >= 20.0 and ( states(
+                      'sensor.sonoff_a48001620f_temperature' ) | float ) <
+                      24.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.sonoff_a48001620f_temperature' )
+                      | float ) >= 18.0 and ( states(
+                      'sensor.sonoff_a48001620f_temperature' ) | float ) <
+                      20.0%}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.sonoff_a48001620f_temperature' )
+                      | float ) < 18.0 %}
+
+                      blue
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    layout: horizontal
+                    secondary: '{{ states(''sensor.sonoff_a48001620f_humidity'') }}%'
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                            height: 50px !important;
+                          }
+                          :host {
+                                --mush-icon-size: 35px;
+                                --mush-card-primary-font-size: 12px;
+                                }
+    entity: sensor.temperatura_sala
+    secondary: >-
+      {{ state_attr('weather.accuweather', 'temperature') }}°C || {{
+      state_attr('weather.accuweather', 'humidity') }}%
+    badge_color: ''
+    badge_icon: ''
+    primary: Clima
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 85px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }

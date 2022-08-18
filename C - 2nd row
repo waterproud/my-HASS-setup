@@ -1,0 +1,1634 @@
+square: false
+columns: 1
+type: grid
+cards:
+  - square: false
+    columns: 6
+    type: grid
+    cards:
+      - type: custom:mushroom-entity-card
+        entity: light.cucina
+        tap_action:
+          action: call-service
+          service: light.toggle
+          service_data:
+            transition: 2
+            kelvin: 3900
+            brightness: 255
+          target:
+            entity_id: light.cucina
+        hold_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Cucina
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 10px;
+                   padding-right: 10px;
+                   padding-left: 10px;
+                   padding-bottom: 10px;     
+                }
+              card:
+                square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.cucina
+                    layout: vertical
+                    show_brightness_control: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon: hue:room-kitchen
+                  - type: custom:mushroom-light-card
+                    entity: light.color_temperature_light_5
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    name: Luce1
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon: hue:bulb-candle
+                    hide_state: false
+                  - type: custom:mushroom-light-card
+                    entity: light.color_temperature_light_6
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    name: Luce 2
+                    hide_state: false
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon: hue:bulb-candle
+                  - type: custom:mushroom-light-card
+                    entity: light.color_temperature_light_7
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    name: Luce 3
+                    hide_state: false
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon: hue:bulb-candle
+                  - type: custom:mushroom-light-card
+                    entity: light.color_temperature_light_8
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    name: Luce 4
+                    hide_state: false
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon: hue:bulb-candle
+        double_tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Cucina
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 10px;
+                   padding-right: 10px;
+                   padding-left: 10px;
+                   padding-bottom: 10px;     
+                }
+              card:
+                square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.cucina
+                    layout: vertical
+                    show_brightness_control: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon: hue:room-kitchen
+                  - type: custom:mushroom-light-card
+                    entity: light.color_temperature_light_5
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    name: Luce1
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon: hue:bulb-candle
+                    hide_state: false
+                  - type: custom:mushroom-light-card
+                    entity: light.color_temperature_light_6
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    name: Luce 2
+                    hide_state: false
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon: hue:bulb-candle
+                  - type: custom:mushroom-light-card
+                    entity: light.color_temperature_light_7
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    name: Luce 3
+                    hide_state: false
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon: hue:bulb-candle
+                  - type: custom:mushroom-light-card
+                    entity: light.color_temperature_light_8
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    name: Luce 4
+                    hide_state: false
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    icon: hue:bulb-candle
+        icon: hue:room-kitchen
+        name: ' '
+        layout: vertical
+        secondary_info: none
+        primary_info: none
+        icon_color: amber
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        entity: light.sala
+        tap_action:
+          action: call-service
+          service: light.toggle
+          service_data:
+            transition: 2
+            kelvin: 3900
+            brightness: 255
+          target:
+            entity_id:
+              - light.sala
+        hold_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Sala
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 10px;
+                   padding-right: 10px;
+                   padding-left: 10px;
+                   padding-bottom: 10px;     
+                }
+              card:
+                square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.sala
+                    show_color_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.sala
+                    name: Tutte le luci sala
+                    icon: hue:room-dining
+                    layout: vertical
+                    show_brightness_control: true
+                    show_color_temp_control: true
+                  - type: custom:mushroom-title-card
+                    subtitle: 'Luci singole:'
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_2
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_lightstrip_plus_2
+                    name: Lightstrip libreria
+                    icon: hue:lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_1
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_lightstrip_plus_1
+                    name: Lightstrip credenza 1
+                    icon: hue:lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_4
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_lightstrip_plus_4
+                    name: Lightstrip credenza 2
+                    icon: hue:lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.luce_ingresso
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.extended_color_light_1
+                          - light.extended_color_light_2
+                    icon: hue:ceiling-being
+                    name: Luce ingresso
+        double_tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Sala
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 10px;
+                   padding-right: 10px;
+                   padding-left: 10px;
+                   padding-bottom: 10px;     
+                }
+              card:
+                square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.sala
+                    show_color_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.sala
+                    name: Tutte le luci sala
+                    icon: hue:room-dining
+                    layout: vertical
+                    show_brightness_control: true
+                    show_color_temp_control: true
+                  - type: custom:mushroom-title-card
+                    subtitle: 'Luci singole:'
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_2
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_lightstrip_plus_2
+                    name: Lightstrip libreria
+                    icon: hue:lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_1
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_lightstrip_plus_1
+                    name: Lightstrip credenza 1
+                    icon: hue:lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_4
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_lightstrip_plus_4
+                    name: Lightstrip credenza 2
+                    icon: hue:lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.luce_ingresso
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.extended_color_light_1
+                          - light.extended_color_light_2
+                    icon: hue:ceiling-being
+                    name: Luce ingresso
+        icon: hue:room-dining
+        name: ' '
+        primary_info: none
+        secondary_info: none
+        layout: vertical
+        icon_color: amber
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+      - type: custom:mushroom-template-card
+        primary: ''
+        secondary: ''
+        icon: hue:room-bedroom
+        entity: light.camera
+        icon_color: |-
+          {% if is_state('input_boolean.philipscamera_on_off', 'on') and
+          is_state('light.hue_lightstrip_plus_5_2', 'on') %}
+          amber
+          {% elif is_state('input_boolean.philipscamera_on_off', 'off') and
+          is_state('light.hue_lightstrip_plus_5_2', 'on') %}
+          amber
+          {% elif is_state('input_boolean.philipscamera_on_off', 'on') and
+          is_state('light.hue_lightstrip_plus_5_2', 'off') %}
+          amber
+          {% else %}
+          grey
+          {% endif %}
+        layout: vertical
+        badge_icon: |-
+          {% if is_state('input_boolean.philipscamera_fan_on_off', 'on') %}
+          mdi:fan
+          {% else %}
+          mdi:fan-off
+          {% endif %}
+        badge_color: |-
+          {% if is_state('input_boolean.philipscamera_fan_on_off', 'on') %}
+          green
+          {% else %}
+          grey
+          {% endif %}
+        tap_action:
+          action: call-service
+          service: input_boolean.toggle
+          data: {}
+          target:
+            entity_id: input_boolean.tasto_boolean_camera
+        hold_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Camera
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 10px;
+                   padding-right: 10px;
+                   padding-left: 10px;
+                   padding-bottom: 10px;     
+                }
+              card:
+                square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: Tutte le luci camera
+                    secondary: >-
+                      {% if is_state('input_boolean.philipscamera_on_off', 'on')
+                      and is_state('light.hue_lightstrip_plus_5_2', 'on') %}
+
+                      Tutte accese
+
+                      {% elif is_state('input_boolean.philipscamera_on_off',
+                      'off') and is_state('light.hue_lightstrip_plus_5_2', 'on')
+                      %}
+
+                      Solo lightstrip
+
+                      {% elif is_state('input_boolean.philipscamera_on_off',
+                      'on') and is_state('light.hue_lightstrip_plus_5_2', 'off')
+                      %}
+
+                      Solo plafoniera
+
+                      {% else %}
+
+                      Spenta
+
+                      {% endif %}
+                    icon: hue:room-bedroom
+                    layout: vertical
+                    icon_color: >-
+                      {% if is_state('input_boolean.philipscamera_on_off', 'on')
+                      and is_state('light.hue_lightstrip_plus_5_2', 'on') %}
+
+                      orange
+
+                      {% elif is_state('input_boolean.philipscamera_on_off',
+                      'off') and is_state('light.hue_lightstrip_plus_5_2', 'on')
+                      %}
+
+                      orange
+
+                      {% elif is_state('input_boolean.philipscamera_on_off',
+                      'on') and is_state('light.hue_lightstrip_plus_5_2', 'off')
+                      %}
+
+                      orange
+
+                      {% else %}
+
+                      grey
+
+                      {% endif %}
+                    tap_action:
+                      action: call-service
+                      service: input_boolean.toggle
+                      data: {}
+                      target:
+                        entity_id: input_boolean.tasto_boolean_camera
+                  - type: custom:mushroom-title-card
+                    subtitle: 'Luci singole:'
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_5_2
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id: light.hue_lightstrip_plus_5_2
+                    name: Lightstrip camera
+                    icon: hue:lightstrip
+                    fill_container: false
+                    hide_state: false
+                    collapsible_controls: false
+                  - square: false
+                    columns: 2
+                    type: grid
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: Philips led
+                        secondary: >-
+                          {% if is_state('input_boolean.philipscamera_on_off',
+                          'on') %}
+
+                          Accesa
+
+                          {% else %}
+
+                          Spenta
+
+                          {% endif %}
+                        icon: >-
+                          {% if is_state('input_boolean.philipscamera_on_off',
+                          'on') %}
+
+                          hue:amaze-alt
+
+                          {% else %}
+
+                          hue:amaze-alt-off
+
+                          {% endif %}
+                        icon_color: >-
+                          {% if is_state('input_boolean.philipscamera_on_off',
+                          'on') %}
+
+                          amber
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                                height: 85px !important;
+                              }
+                      - square: false
+                        columns: 2
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:lightning-bolt-circle
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: turn on
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: green
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                    height: 85px !important;
+                                  }
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:close-circle-outline
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: turn off
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: red
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                    height: 85px !important;
+                                  }
+                  - type: custom:mushroom-title-card
+                    subtitle: 'Ventilatore:'
+                  - square: false
+                    columns: 1
+                    type: grid
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: Philips fan
+                        secondary: >-
+                          {% if
+                          is_state('input_boolean.philipscamera_fan_on_off',
+                          'on') %}
+
+                          Accesa
+
+                          {% else %}
+
+                          Spenta
+
+                          {% endif %}
+                        icon: >-
+                          {% if
+                          is_state('input_boolean.philipscamera_fan_on_off',
+                          'on') %}
+
+                          mdi:fan
+
+                          {% else %}
+
+                          mdi:fan-off
+
+                          {% endif %}
+                        icon_color: >-
+                          {% if
+                          is_state('input_boolean.philipscamera_fan_on_off',
+                          'on') %}
+
+                          green
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                      - square: false
+                        columns: 4
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:fan-speed-1
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: fan 1
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: lime
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:fan-speed-2
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: fan 2
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: light-green
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:fan-speed-3
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: fan 3
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: green
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:fan-off
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: fan 0
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: red
+        double_tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Camera
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 10px;
+                   padding-right: 10px;
+                   padding-left: 10px;
+                   padding-bottom: 10px;     
+                }
+              card:
+                square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: Tutte le luci camera
+                    secondary: >-
+                      {% if is_state('input_boolean.philipscamera_on_off', 'on')
+                      and is_state('light.hue_lightstrip_plus_5_2', 'on') %}
+
+                      Tutte accese
+
+                      {% elif is_state('input_boolean.philipscamera_on_off',
+                      'off') and is_state('light.hue_lightstrip_plus_5_2', 'on')
+                      %}
+
+                      Solo lightstrip
+
+                      {% elif is_state('input_boolean.philipscamera_on_off',
+                      'on') and is_state('light.hue_lightstrip_plus_5_2', 'off')
+                      %}
+
+                      Solo plafoniera
+
+                      {% else %}
+
+                      Spenta
+
+                      {% endif %}
+                    icon: hue:room-bedroom
+                    layout: vertical
+                    icon_color: >-
+                      {% if is_state('input_boolean.philipscamera_on_off', 'on')
+                      and is_state('light.hue_lightstrip_plus_5_2', 'on') %}
+
+                      orange
+
+                      {% elif is_state('input_boolean.philipscamera_on_off',
+                      'off') and is_state('light.hue_lightstrip_plus_5_2', 'on')
+                      %}
+
+                      orange
+
+                      {% elif is_state('input_boolean.philipscamera_on_off',
+                      'on') and is_state('light.hue_lightstrip_plus_5_2', 'off')
+                      %}
+
+                      orange
+
+                      {% else %}
+
+                      grey
+
+                      {% endif %}
+                    tap_action:
+                      action: call-service
+                      service: input_boolean.toggle
+                      data: {}
+                      target:
+                        entity_id: input_boolean.tasto_boolean_camera
+                  - type: custom:mushroom-title-card
+                    subtitle: 'Luci singole:'
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_5_2
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id: light.hue_lightstrip_plus_5_2
+                    name: Lightstrip camera
+                    icon: hue:lightstrip
+                    fill_container: false
+                    hide_state: false
+                    collapsible_controls: false
+                  - square: false
+                    columns: 2
+                    type: grid
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: Philips led
+                        secondary: >-
+                          {% if is_state('input_boolean.philipscamera_on_off',
+                          'on') %}
+
+                          Accesa
+
+                          {% else %}
+
+                          Spenta
+
+                          {% endif %}
+                        icon: >-
+                          {% if is_state('input_boolean.philipscamera_on_off',
+                          'on') %}
+
+                          hue:amaze-alt
+
+                          {% else %}
+
+                          hue:amaze-alt-off
+
+                          {% endif %}
+                        icon_color: >-
+                          {% if is_state('input_boolean.philipscamera_on_off',
+                          'on') %}
+
+                          amber
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                                height: 85px !important;
+                              }
+                      - square: false
+                        columns: 2
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:lightning-bolt-circle
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: turn on
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: green
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                    height: 85px !important;
+                                  }
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:close-circle-outline
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: turn off
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: red
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card {
+                                    height: 85px !important;
+                                  }
+                  - type: custom:mushroom-title-card
+                    subtitle: 'Ventilatore:'
+                  - square: false
+                    columns: 1
+                    type: grid
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: Philips fan
+                        secondary: >-
+                          {% if
+                          is_state('input_boolean.philipscamera_fan_on_off',
+                          'on') %}
+
+                          Accesa
+
+                          {% else %}
+
+                          Spenta
+
+                          {% endif %}
+                        icon: >-
+                          {% if
+                          is_state('input_boolean.philipscamera_fan_on_off',
+                          'on') %}
+
+                          mdi:fan
+
+                          {% else %}
+
+                          mdi:fan-off
+
+                          {% endif %}
+                        icon_color: >-
+                          {% if
+                          is_state('input_boolean.philipscamera_fan_on_off',
+                          'on') %}
+
+                          green
+
+                          {% else %}
+
+                          grey
+
+                          {% endif %}
+                      - square: false
+                        columns: 4
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:fan-speed-1
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: fan 1
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: lime
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:fan-speed-2
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: fan 2
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: light-green
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:fan-speed-3
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: fan 3
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: green
+                          - type: custom:mushroom-template-card
+                            primary: ''
+                            secondary: ''
+                            icon: mdi:fan-off
+                            entity: remote.broadlink_remote
+                            tap_action:
+                              action: call-service
+                              service: remote.send_command
+                              data:
+                                device: philipscamera
+                                command: fan 0
+                              target:
+                                entity_id: remote.broadlink_remote
+                            layout: vertical
+                            icon_color: red
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        entity: light.bagno
+        tap_action:
+          action: call-service
+          service: light.toggle
+          service_data:
+            transition: 2
+            kelvin: 3900
+            brightness: 255
+          target:
+            entity_id:
+              - light.bagno
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        icon: mdi:bathtub
+        name: ' '
+        icon_color: amber
+        layout: vertical
+        primary_info: none
+        secondary_info: none
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        entity: light.salotto
+        tap_action:
+          action: call-service
+          service: light.toggle
+          target:
+            entity_id:
+              - light.salotto
+          data:
+            transition: 2
+            kelvin: 3700
+            brightness: 255
+        hold_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Salotto
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 10px;
+                   padding-right: 10px;
+                   padding-left: 10px;
+                   padding-bottom: 10px;     
+                }
+              card:
+                square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.salotto
+                    show_color_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3700
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.salotto
+                    name: Tutte le luci salotto
+                    icon: hue:room-living
+                    layout: vertical
+                    show_brightness_control: true
+                    show_color_temp_control: true
+                  - type: custom:mushroom-title-card
+                    subtitle: 'Luci singole:'
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_3
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_lightstrip_plus_3
+                    name: Lightstrip TV
+                    icon: hue:lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_filament_bulb_1
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3700
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_filament_bulb_1
+                    icon: hue:bulb-filament
+                    name: Luce divano
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_color_spot_2
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_color_spot_2
+                    name: Faretto salotto
+                    icon: hue:single-spot
+        double_tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Salotto
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 10px;
+                   padding-right: 10px;
+                   padding-left: 10px;
+                   padding-bottom: 10px;     
+                }
+              card:
+                square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.salotto
+                    show_color_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3700
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.salotto
+                    name: Tutte le luci salotto
+                    icon: hue:room-living
+                    layout: vertical
+                    show_brightness_control: true
+                    show_color_temp_control: true
+                  - type: custom:mushroom-title-card
+                    subtitle: 'Luci singole:'
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_3
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_lightstrip_plus_3
+                    name: Lightstrip TV
+                    icon: hue:lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_filament_bulb_1
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3700
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_filament_bulb_1
+                    icon: hue:bulb-filament
+                    name: Luce divano
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_color_spot_2
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_color_spot_2
+                    name: Faretto salotto
+                    icon: hue:single-spot
+        icon: hue:room-living
+        name: ' '
+        primary_info: none
+        secondary_info: none
+        layout: vertical
+        icon_color: amber
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        entity: light.ufficio
+        tap_action:
+          action: call-service
+          service: light.toggle
+          service_data:
+            transition: 2
+            kelvin: 3900
+            brightness: 255
+          target:
+            entity_id:
+              - light.ufficio
+        hold_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Ufficio
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 10px;
+                   padding-right: 10px;
+                   padding-left: 10px;
+                   padding-bottom: 10px;     
+                }
+              card:
+                type: grid
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.ufficio
+                    show_color_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id: light.ufficio
+                    name: Tutte le luci ufficio
+                    icon: hue:room-office
+                    layout: vertical
+                    show_brightness_control: true
+                    show_color_temp_control: true
+                  - type: custom:mushroom-title-card
+                    subtitle: 'Luci singole:'
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_5
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id: light.hue_lightstrip_plus_5
+                    name: Lightstrip ufficio
+                    icon: hue:lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.faretti_ufficio
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_color_spot_1
+                          - light.hue_color_spot_3
+                          - light.hue_color_spot_4
+                    name: Faretti ufficio
+                    icon: hue:double-spot
+                square: false
+                columns: 1
+        double_tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            title: Opzioni Ufficio
+            card:
+              type: custom:mod-card
+              style: |
+                ha-card {
+                   padding-top: 10px;
+                   padding-right: 10px;
+                   padding-left: 10px;
+                   padding-bottom: 10px;     
+                }
+              card:
+                type: grid
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.ufficio
+                    show_color_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id: light.ufficio
+                    name: Tutte le luci ufficio
+                    icon: hue:room-office
+                    layout: vertical
+                    show_brightness_control: true
+                    show_color_temp_control: true
+                  - type: custom:mushroom-title-card
+                    subtitle: 'Luci singole:'
+                  - type: custom:mushroom-light-card
+                    entity: light.hue_lightstrip_plus_5
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id: light.hue_lightstrip_plus_5
+                    name: Lightstrip ufficio
+                    icon: hue:lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.faretti_ufficio
+                    show_brightness_control: true
+                    show_color_control: true
+                    use_light_color: true
+                    show_color_temp_control: true
+                    tap_action:
+                      action: call-service
+                      service: light.toggle
+                      service_data:
+                        transition: 2
+                        kelvin: 3900
+                        brightness: 255
+                      target:
+                        entity_id:
+                          - light.hue_color_spot_1
+                          - light.hue_color_spot_3
+                          - light.hue_color_spot_4
+                    name: Faretti ufficio
+                    icon: hue:double-spot
+                square: false
+                columns: 1
+        icon: hue:room-office
+        name: ' '
+        icon_color: amber
+        layout: vertical
+        secondary_info: none
+        primary_info: none
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+  - square: false
+    columns: 6
+    type: grid
+    cards:
+      - type: custom:mushroom-entity-card
+        tap_action:
+          action: call-service
+          service: light.toggle
+          service_data:
+            transition: 2
+            kelvin: 3900
+            brightness: 255
+          target:
+            entity_id: light.scale_2
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        name: ' '
+        layout: vertical
+        secondary_info: none
+        primary_info: none
+        icon_color: amber
+        icon: hue:room-stairs
+        entity: light.scale_2
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        entity: switch.0x00124b0026b6c13a
+        tap_action:
+          action: toggle
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        icon: hue:room-bbq
+        name: ' '
+        layout: vertical
+        secondary_info: none
+        primary_info: none
+        icon_color: amber
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        entity: switch.0x00124b0026b7a69e
+        tap_action:
+          action: toggle
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        name: ' '
+        layout: vertical
+        secondary_info: none
+        primary_info: none
+        icon_color: amber
+        icon: hue:room-terrace
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        entity: light.svapo
+        tap_action:
+          action: call-service
+          service: light.toggle
+          service_data:
+            transition: 2
+            kelvin: 3900
+            brightness: 255
+          target:
+            entity_id:
+              - light.svapo
+              - light.0xcc86ecfffe1c5e12
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        icon: hue:room-garage
+        name: ' '
+        icon_color: amber
+        layout: vertical
+        primary_info: none
+        secondary_info: none
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        entity: switch.0x00124b0026b6b731
+        tap_action:
+          action: toggle
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        name: ' '
+        layout: vertical
+        secondary_info: none
+        primary_info: none
+        icon_color: amber
+        icon: hue:room-attic
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+      - type: custom:mushroom-entity-card
+        entity: switch.0x00124b0026b79c3d
+        tap_action:
+          action: toggle
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        name: ' '
+        layout: vertical
+        secondary_info: none
+        primary_info: none
+        icon_color: amber
+        icon: hue:room-carport
+        card_mod:
+          style:
+            .: |
+              ha-card {
+              height: 55px !important; 
+              }
+view_layout:
+  position: main

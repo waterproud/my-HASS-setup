@@ -1,0 +1,2614 @@
+square: false
+columns: 4
+type: grid
+cards:
+  - type: custom:mushroom-template-card
+    icon: mdi:flash
+    entity: sensor.shellyem_98cdac1f3a41_channel_1_power
+    layout: vertical
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Dettagli Consumo
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px; 
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: >-
+                      {{states('sensor.shellyem_98cdac1f3a41_channel_1_power')
+                      }} W
+                    secondary: ''
+                    icon: mdi:lightning-bolt
+                    icon_color: >-
+                      {% if ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      > 3000.0 %}
+
+                      pink
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      > 2400.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      < 3000.0%}
+
+                      red
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      > 2000.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      < 2400.0%}
+
+                      orange
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      > 1600.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      < 2000.0%}
+
+                      amber
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      > 1200.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      < 1600.0%}
+
+                      yellow
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      > 800.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      < 1200.0%}
+
+                      lime
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      > 400.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      < 800.0%}
+
+                      light-green
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      > 200.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      < 400.0%}
+
+                      green
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+                      < 200.0 %}
+
+                      teal
+
+                      {% elif
+                      is_state('sensor.shellyem_98cdac1f3a41_channel_1_power',
+                      'unavailable') %}
+
+                      black
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    entity: sensor.shellyem_98cdac1f3a41_channel_1_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    layout: horizontal
+                    multiline_secondary: false
+                    fill_container: true
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 65px !important;
+                          border-radius: 15px !important; 
+                          }
+                          :host {
+                          --mush-icon-size: 50px;
+                          --mush-card-primary-font-size: 18px !important;
+                          }
+                  - type: custom:mini-graph-card
+                    line_width: 2
+                    align_header: center
+                    height: 90
+                    entities:
+                      - sensor.shellyem_98cdac1f3a41_channel_1_power
+                    align_icon: left
+                    align_state: center
+                    show:
+                      name: false
+                      state: false
+                      icon: false
+                      labels: false
+                      fill: true
+                      graph: line
+                      icon_adaptive_color: true
+                    name: Energia utilizzata
+                    hours_to_show: 12
+                    points_per_hour: 240
+                    color_thresholds:
+                      - value: 0
+                        color: '#32b30e'
+                      - value: 1500
+                        color: '#d9b929'
+                      - value: 3000
+                        color: '#cf1117'
+                    font_size: 1
+                    font_size_header: 1
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          border-radius: 15px !important; 
+                          }
+              - type: custom:mushroom-title-card
+                title: ''
+                alignment: center
+                subtitle: '------ Luci ------'
+              - type: custom:mushroom-template-card
+                primary: Luci in casa
+                secondary: '{{states(''sensor.luci_casa_power'') }} W'
+                icon: >-
+                  {% if ( states( 'sensor.luci_casa_power' ) | float ) >= 10.0
+                  %}
+
+                  mdi:lightbulb-group-outline
+
+                  {% elif ( states( 'sensor.luci_casa_power' ) | float ) < 10.0
+                  %}
+
+                  mdi:lightbulb-group-off
+
+                  {% elif is_state('sensor.luci_casa_power', 'unavailable') %}
+
+                  black
+
+                  {% else %}
+
+                  black
+
+                  {% endif %}
+                icon_color: >-
+                  {% if ( states( 'sensor.luci_casa_power' ) | float ) >= 300.0
+                  %}
+
+                  red
+
+                  {% elif ( states( 'sensor.luci_casa_power' ) | float ) >=
+                  200.0 and ( states( 'sensor.luci_casa_power' ) | float ) <
+                  300.0%}
+
+                  orange
+
+                  {% elif ( states( 'sensor.luci_casa_power' ) | float ) >=
+                  150.0 and ( states( 'sensor.luci_casa_power' ) | float ) <
+                  200.0%}
+
+                  amber
+
+                  {% elif ( states( 'sensor.luci_casa_power' ) | float ) >= 50.0
+                  and ( states( 'sensor.luci_casa_power' ) | float ) < 150.0%}
+
+                  light-green
+
+                  {% elif ( states( 'sensor.luci_casa_power' ) | float ) >= 10.0
+                  and ( states( 'sensor.luci_casa_power' ) | float ) < 50.0%}
+
+                  green
+
+                  {% elif ( states( 'sensor.luci_casa_power' ) | float ) < 10.0
+                  %}
+
+                  grey
+
+                  {% elif is_state('sensor.luci_casa_power', 'unavailable') %}
+
+                  black
+
+                  {% else %}
+
+                  black
+
+                  {% endif %}
+                entity: sensor.luci_casa_power
+                tap_action:
+                  action: more-info
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                layout: horizontal
+                multiline_secondary: false
+                fill_container: true
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                      height: 50px !important;
+                      border-radius: 15px !important; 
+                      }
+              - type: custom:mushroom-title-card
+                title: ''
+                alignment: center
+                subtitle: '------ UPS // Server & Ufficio ------'
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: Server & Ufficio
+                    secondary: >-
+                      {{states('sensor.server_ups_power') }} W
+                      ({{states('sensor.myups_load') }}%)
+                    icon: mdi:server
+                    icon_color: >-
+                      {% if ( states( 'sensor.myups_load' ) | float ) >= 95 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.myups_load' ) | float ) >= 80
+                      and ( states( 'sensor.myups_load' ) | float ) < 95 %}
+
+                      orange
+
+                      {% elif ( states( 'sensor.myups_load' ) | float ) >= 50.0
+                      and ( states( 'sensor.myups_load' ) | float ) < 80 %}
+
+                      amber
+
+                      {% elif ( states( 'sensor.myups_load' ) | float ) >= 30
+                      and ( states( 'sensor.myups_load' ) | float ) < 50 %}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.myups_load' ) | float ) < 30 %}
+
+                      green
+
+                      {% elif is_state('sensor.myups_load', 'unavailable') %}
+
+                      black
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    entity: sensor.server_ups_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: 'Batteria: {{states(''sensor.myups_battery_charge'') }}%'
+                    secondary: '{{states(''sensor.myups_status'') }}'
+                    icon: >-
+                      {% if ( states( 'sensor.myups_battery_charge' ) | float )
+                      > 95 %}
+
+                      mdi:battery-charging
+
+                      {% elif ( states( 'sensor.myups_battery_charge' ) | float
+                      ) > 80 and ( states( 'sensor.myups_battery_charge' ) |
+                      float ) < 95 %}
+
+                      mdi:battery-80
+
+                      {% elif ( states( 'sensor.myups_battery_charge' ) | float
+                      ) > 50.0 and ( states( 'sensor.myups_battery_charge' ) |
+                      float ) < 80 %}
+
+                      mdi:battery-60
+
+                      {% elif ( states( 'sensor.myups_battery_charge' ) | float
+                      ) > 30 and ( states( 'sensor.myups_battery_charge' ) |
+                      float ) < 50 %}
+
+                      mdi:battery-30
+
+                      {% elif ( states( 'sensor.myups_battery_charge' ) | float
+                      ) < 30 %}
+
+                      mdi:battery-alert
+
+                      {% elif is_state('sensor.myups_battery_charge',
+                      'unavailable') %}
+
+                      mdi:battery-alert
+
+                      {% else %}
+
+                      mdi:battery-alert
+
+                      {% endif %}
+                    icon_color: >-
+                      {% if ( states( 'sensor.myups_battery_charge' ) | float )
+                      > 95 %}
+
+                      green
+
+                      {% elif ( states( 'sensor.myups_battery_charge' ) | float
+                      ) > 80 and ( states( 'sensor.myups_battery_charge' ) |
+                      float ) < 95 %}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.myups_battery_charge' ) | float
+                      ) > 50.0 and ( states( 'sensor.myups_battery_charge' ) |
+                      float ) < 80 %}
+
+                      amber
+
+                      {% elif ( states( 'sensor.myups_battery_charge' ) | float
+                      ) > 30 and ( states( 'sensor.myups_battery_charge' ) |
+                      float ) < 50 %}
+
+                      orange
+
+                      {% elif ( states( 'sensor.myups_battery_charge' ) | float
+                      ) < 30 %}
+
+                      red
+
+                      {% elif is_state('sensor.myups_battery_charge',
+                      'unavailable') %}
+
+                      black
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    entity: sensor.myups_battery_charge
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+              - type: custom:mushroom-title-card
+                title: ''
+                alignment: center
+                subtitle: '------ Clima------'
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: Climatizzatore
+                    secondary: >-
+                      {{states('sensor.shellyem_98cdac1f3a41_channel_2_power')
+                      }} W
+                    icon: mdi:air-conditioner
+                    icon_color: >-
+                      {% if ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_2_power' ) | float )
+                      >= 1500.0 %}
+
+                      red
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_2_power' ) | float )
+                      >= 1000.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_2_power' ) | float )
+                      < 1500.0%}
+
+                      orange
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_2_power' ) | float )
+                      >= 500.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_2_power' ) | float )
+                      < 1000.0%}
+
+                      amber
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_2_power' ) | float )
+                      >= 100.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_2_power' ) | float )
+                      < 500.0%}
+
+                      light-green
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_2_power' ) | float )
+                      >= 6.0 and ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_2_power' ) | float )
+                      < 100.0%}
+
+                      green
+
+                      {% elif ( states(
+                      'sensor.shellyem_98cdac1f3a41_channel_2_power' ) | float )
+                      < 6.0 %}
+
+                      grey
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    entity: sensor.shellyem_98cdac1f3a41_channel_2_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Ventola camera
+                    secondary: '{{states(''sensor.ventilatore_camera_power'') }} W'
+                    icon: >-
+                      {% if ( states( 'sensor.ventilatore_camera_power' ) |
+                      float ) >= 10.0 %}
+
+                      mdi:ceiling-fan
+
+                      {% elif ( states( 'sensor.ventilatore_camera_power' ) |
+                      float ) < 10.0 %}
+
+                      mdi:ceiling-fan
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    icon_color: >-
+                      {% if ( states( 'sensor.ventilatore_camera_power' ) |
+                      float ) >= 1.0 %}
+
+                      purple
+
+                      {% else %}
+
+                      grey
+
+                      {% endif %}
+                    entity: sensor.ventilatore_camera_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Purificatore sala
+                    secondary: '{{states(''sensor.mi_air_purifier_3_3h_power'') }} W'
+                    icon: mdi:air-purifier
+                    icon_color: >-
+                      {% if ( states( 'sensor.mi_air_purifier_3_3h_power' ) |
+                      float ) >= 1.0 %}
+
+                      purple
+
+                      {% else %}
+
+                      grey
+
+                      {% endif %}
+                    entity: sensor.mi_air_purifier_3_3h_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Levoit camera
+                    secondary: '{{states(''sensor.purificatore_aria_power'') }} W'
+                    icon: mdi:air-purifier
+                    icon_color: >-
+                      {% if ( states( 'sensor.purificatore_aria_power' ) | float
+                      ) >= 1.0 %}
+
+                      purple
+
+                      {% else %}
+
+                      grey
+
+                      {% endif %}
+                    entity: sensor.purificatore_aria_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+              - type: custom:mushroom-title-card
+                title: ''
+                alignment: center
+                subtitle: '------ Elettrodomestici ------'
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: Lavatrice
+                    secondary: '{{states(''sensor.shellyplug_lavatrice_power'') }} W'
+                    icon: >-
+                      {% if ( states( 'sensor.shellyplug_lavatrice_power' ) |
+                      float ) >= 10.0 %}
+
+                      mdi:washing-machine
+
+                      {% else %}
+
+                      mdi:washing-machine-off
+
+                      {% endif %}
+                    icon_color: >-
+                      {% if ( states( 'sensor.shellyplug_lavatrice_power' ) |
+                      float ) >= 2000.0 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.shellyplug_lavatrice_power' ) |
+                      float ) >= 1250.0 and ( states(
+                      'sensor.shellyplug_lavatrice_power' ) | float ) < 2000.0%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.shellyplug_lavatrice_power' ) |
+                      float ) >= 500.0 and ( states(
+                      'sensor.shellyplug_lavatrice_power' ) | float ) < 1250.0%}
+
+                      amber
+
+                      {% elif ( states( 'sensor.shellyplug_lavatrice_power' ) |
+                      float ) >= 250.0 and ( states(
+                      'sensor.shellyplug_lavatrice_power' ) | float ) < 500.0%}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.shellyplug_lavatrice_power' ) |
+                      float ) >= 10.0 and ( states(
+                      'sensor.shellyplug_lavatrice_power' ) | float ) < 250.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.shellyplug_lavatrice_power' ) |
+                      float ) >= 1.0 and ( states(
+                      'sensor.shellyplug_lavatrice_power' ) | float ) < 10.0%}
+
+                      blue
+
+                      {% elif ( states( 'sensor.shellyplug_lavatrice_power' ) |
+                      float ) < 1.0 %}
+
+                      grey
+
+                      {% elif is_state('sensor.shellyplug_lavatrice_power',
+                      'unavailable') %}
+
+                      black
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    entity: sensor.shellyplug_lavatrice_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Asciugatrice
+                    secondary: '{{states(''sensor.shellyplug_asciugatrice_power'') }} W'
+                    icon: >-
+                      {% if ( states( 'sensor.shellyplug_asciugatrice_power' ) |
+                      float ) >= 10.0 %}
+
+                      mdi:tumble-dryer
+
+                      {% else %}
+
+                      mdi:tumble-dryer-off
+
+                      {% endif %}
+                    icon_color: >-
+                      {% if ( states( 'sensor.shellyplug_asciugatrice_power' ) |
+                      float ) >= 2000.0 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.shellyplug_asciugatrice_power' )
+                      | float ) >= 1250.0 and ( states(
+                      'sensor.shellyplug_asciugatrice_power' ) | float ) <
+                      2000.0%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.shellyplug_asciugatrice_power' )
+                      | float ) >= 500.0 and ( states(
+                      'sensor.shellyplug_asciugatrice_power' ) | float ) <
+                      1250.0%}
+
+                      amber
+
+                      {% elif ( states( 'sensor.shellyplug_asciugatrice_power' )
+                      | float ) >= 250.0 and ( states(
+                      'sensor.shellyplug_asciugatrice_power' ) | float ) <
+                      500.0%}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.shellyplug_asciugatrice_power' )
+                      | float ) >= 10.0 and ( states(
+                      'sensor.shellyplug_asciugatrice_power' ) | float ) <
+                      250.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.shellyplug_asciugatrice_power' )
+                      | float ) >= 1.0 and ( states(
+                      'sensor.shellyplug_asciugatrice_power' ) | float ) <
+                      10.0%}
+
+                      blue
+
+                      {% elif ( states( 'sensor.shellyplug_asciugatrice_power' )
+                      | float ) < 1.0 %}
+
+                      grey
+
+                      {% elif is_state('sensor.shellyplug_asciugatrice_power',
+                      'unavailable') %}
+
+                      black
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    entity: sensor.shellyplug_asciugatrice_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Lavastoviglie
+                    secondary: '{{states(''sensor.shellyplug_lavastoviglie_power'') }} W'
+                    icon: >-
+                      {% if ( states( 'sensor.shellyplug_lavastoviglie_power' )
+                      | float ) >= 10.0 %}
+
+                      mdi:dishwasher
+
+                      {% else %}
+
+                      mdi:dishwasher-off
+
+                      {% endif %}
+                    icon_color: >-
+                      {% if ( states( 'sensor.shellyplug_lavastoviglie_power' )
+                      | float ) >= 2000.0 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.shellyplug_lavastoviglie_power'
+                      ) | float ) >= 1250.0 and ( states(
+                      'sensor.shellyplug_lavastoviglie_power' ) | float ) <
+                      2000.0%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.shellyplug_lavastoviglie_power'
+                      ) | float ) >= 500.0 and ( states(
+                      'sensor.shellyplug_lavastoviglie_power' ) | float ) <
+                      1250.0%}
+
+                      amber
+
+                      {% elif ( states( 'sensor.shellyplug_lavastoviglie_power'
+                      ) | float ) >= 250.0 and ( states(
+                      'sensor.shellyplug_lavastoviglie_power' ) | float ) <
+                      500.0%}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.shellyplug_lavastoviglie_power'
+                      ) | float ) >= 10.0 and ( states(
+                      'sensor.shellyplug_lavastoviglie_power' ) | float ) <
+                      250.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.shellyplug_lavastoviglie_power'
+                      ) | float ) >= 1.0 and ( states(
+                      'sensor.shellyplug_lavastoviglie_power' ) | float ) <
+                      10.0%}
+
+                      blue
+
+                      {% elif ( states( 'sensor.shellyplug_lavastoviglie_power'
+                      ) | float ) < 1.0 %}
+
+                      grey
+
+                      {% elif is_state('sensor.shellyplug_lavastoviglie_power',
+                      'unavailable') %}
+
+                      black
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    entity: sensor.shellyplug_lavastoviglie_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Forno
+                    secondary: '{{states(''sensor.shellyplug_forno_power'') }} W'
+                    icon: mdi:toaster-oven
+                    icon_color: >-
+                      {% if ( states( 'sensor.shellyplug_forno_power' ) | float
+                      ) >= 2000.0 %}
+
+                      red
+
+                      {% elif ( states( 'sensor.shellyplug_forno_power' ) |
+                      float ) >= 1250.0 and ( states(
+                      'sensor.shellyplug_forno_power' ) | float ) < 2000.0%}
+
+                      orange
+
+                      {% elif ( states( 'sensor.shellyplug_forno_power' ) |
+                      float ) >= 500.0 and ( states(
+                      'sensor.shellyplug_forno_power' ) | float ) < 1250.0%}
+
+                      amber
+
+                      {% elif ( states( 'sensor.shellyplug_forno_power' ) |
+                      float ) >= 250.0 and ( states(
+                      'sensor.shellyplug_forno_power' ) | float ) < 500.0%}
+
+                      light-green
+
+                      {% elif ( states( 'sensor.shellyplug_forno_power' ) |
+                      float ) >= 10.0 and ( states(
+                      'sensor.shellyplug_forno_power' ) | float ) < 250.0%}
+
+                      green
+
+                      {% elif ( states( 'sensor.shellyplug_forno_power' ) |
+                      float ) >= 1.0 and ( states(
+                      'sensor.shellyplug_forno_power' ) | float ) < 10.0%}
+
+                      blue
+
+                      {% elif ( states( 'sensor.shellyplug_forno_power' ) |
+                      float ) < 1.0 %}
+
+                      grey
+
+                      {% elif is_state('sensor.shellyplug_forno_power',
+                      'unavailable') %}
+
+                      black
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    entity: sensor.shellyplug_forno_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Frigo
+                    secondary: '{{states(''sensor.shellyplug_frigo_power'') }} W'
+                    icon: >-
+                      {% if ( states( 'sensor.shellyplug_frigo_power' ) | float
+                      ) >= 10.0 %}
+
+                      mdi:fridge-outline
+
+                      {% else %}
+
+                      mdi:fridge-off-outline
+
+                      {% endif %}
+                    icon_color: >-
+                      {% if ( states( 'sensor.shellyplug_frigo_power' ) | float
+                      ) >= 10.0 %}
+
+                      blue
+
+                      {% elif ( states( 'sensor.shellyplug_frigo_power' ) |
+                      float ) < 10.0 %}
+
+                      grey
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    entity: sensor.shellyplug_frigo_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Freezer
+                    secondary: '{{states(''sensor.shellyplug_freezer_power'') }} W'
+                    icon: >-
+                      {% if ( states( 'sensor.shellyplug_freezer_power' ) |
+                      float ) >= 10.0 %}
+
+                      mdi:fridge-industrial-outline
+
+                      {% else %}
+
+                      mdi:fridge-industrial-off-outline
+
+                      {% endif %}
+                    icon_color: >-
+                      {% if ( states( 'sensor.shellyplug_freezer_power' ) |
+                      float ) >= 10.0 %}
+
+                      blue
+
+                      {% elif ( states( 'sensor.shellyplug_freezer_power' ) |
+                      float ) < 10.0 %}
+
+                      grey
+
+                      {% else %}
+
+                      black
+
+                      {% endif %}
+                    entity: sensor.shellyplug_freezer_power
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                          height: 50px !important;
+                          border-radius: 15px !important; 
+                          }
+              - type: custom:mushroom-template-card
+                primary: Cantinetta
+                secondary: '{{states(''sensor.shellyplug_cantinetta_power'') }} W'
+                icon: mdi:bottle-wine-outline
+                icon_color: >-
+                  {% if ( states( 'sensor.shellyplug_cantinetta_power' ) | float
+                  ) >= 5.0 %}
+
+                  blue
+
+                  {% elif ( states( 'sensor.shellyplug_cantinetta_power' ) |
+                  float ) < 5.0 %}
+
+                  grey
+
+                  {% else %}
+
+                  black
+
+                  {% endif %}
+                entity: sensor.shellyplug_cantinetta_power
+                tap_action:
+                  action: more-info
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                      height: 50px !important;
+                      border-radius: 15px !important; 
+                      }
+                      :host {
+                      margin-left: 100px !important;
+                      margin-right: 100px !important;
+                      }
+    double_tap_action:
+      action: none
+    hold_action:
+      action: none
+    icon_color: >-
+      {% if ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float )
+      > 3000.0 %}
+
+      pink
+
+      {% elif ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float
+      ) > 2400.0 and ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' )
+      | float ) < 3000.0%}
+
+      red
+
+      {% elif ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float
+      ) > 2000.0 and ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' )
+      | float ) < 2400.0%}
+
+      orange
+
+      {% elif ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float
+      ) > 1600.0 and ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' )
+      | float ) < 2000.0%}
+
+      amber
+
+      {% elif ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float
+      ) > 1200.0 and ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' )
+      | float ) < 1600.0%}
+
+      yellow
+
+      {% elif ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float
+      ) > 800.0 and ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) |
+      float ) < 1200.0%}
+
+      lime
+
+      {% elif ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float
+      ) > 400.0 and ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) |
+      float ) < 800.0%}
+
+      light-green
+
+      {% elif ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float
+      ) > 200.0 and ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) |
+      float ) < 400.0%}
+
+      green
+
+      {% elif ( states( 'sensor.shellyem_98cdac1f3a41_channel_1_power' ) | float
+      ) < 200.0 %}
+
+      teal
+
+      {% elif is_state('sensor.shellyem_98cdac1f3a41_channel_1_power',
+      'unavailable') %}
+
+      black
+
+      {% else %}
+
+      black
+
+      {% endif %}
+    secondary: ''
+    primary: '{{states(''sensor.shellyem_98cdac1f3a41_channel_1_power'') }} W'
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 70px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }
+  - type: custom:mushroom-template-card
+    icon: mdi:wifi
+    entity: binary_sensor.archer_mr600_wan_status_2
+    layout: vertical
+    icon_color: >-
+      {% if ( states( 'sensor.speedtest_download' ) | float ) > 100.00 %}
+
+      green
+
+      {% elif ( states( 'sensor.speedtest_download' ) | float ) > 75.00 and (
+      states( 'sensor.speedtest_download' ) | float ) < 100.00 %}
+
+      light-green
+
+      {% elif ( states( 'sensor.speedtest_download' ) | float ) > 45.00 and (
+      states( 'sensor.speedtest_download' ) | float ) < 75.00 %}
+
+      amber
+
+      {% elif ( states( 'sensor.speedtest_download' ) | float ) > 25.00 and (
+      states( 'sensor.speedtest_download' ) | float ) < 45.00 %}
+
+      orange
+
+      {% else %}
+
+      pink
+
+      {% endif %}
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Dettagli Connessione
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px;  
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: Pi-hole
+                    secondary: AdBlocker no.1
+                    icon: mdi:pi-hole
+                    layout: vertical
+                    tap_action:
+                      action: toggle
+                    entity: switch.pi_hole
+                    icon_color: |-
+                      {% if is_state('switch.pi_hole', 'on') %}
+                      blue
+                      {% else %}
+                      grey
+                      {% endif %}
+                  - type: custom:mushroom-template-card
+                    primary: AdGuard
+                    secondary: AdBlocker no.2
+                    icon: mdi:shield-check-outline
+                    layout: vertical
+                    tap_action:
+                      action: toggle
+                    entity: switch.adguard_home_protection
+                    icon_color: |-
+                      {% if is_state('switch.adguard_home_protection', 'on') %}
+                      blue
+                      {% else %}
+                      grey
+                      {% endif %}
+              - type: entity
+                entity: binary_sensor.archer_mr600_wan_status_2
+                name: Internet
+              - type: custom:mini-graph-card
+                line_width: 3
+                align_header: default
+                align_icon: left
+                entities:
+                  - entity: sensor.speedtest_download
+                    name: Test Download
+                    state_adaptive_color: true
+                    show_fill: false
+                  - entity: sensor.speedtest_ping
+                    color: darkcyan
+                    name: Test Ping
+                    show_fill: true
+                    show_line: false
+                    show_points: false
+                    show_legend: false
+                    show_state: true
+                    state_adaptive_color: true
+                    y_axis: secondary
+                show:
+                  name: true
+                  legend: false
+                  icon: true
+                  labels: true
+                  labels_secondary: true
+                  icon_adaptive_color: true
+                hours_to_show: 12
+                points_per_hour: 30
+                color_thresholds:
+                  - value: 30
+                    color: '#cc4c0c'
+                  - value: 45
+                    color: '#ccac0c'
+                  - value: 65
+                    color: '#26cc0c'
+                height: 50
+                font_size: 60
+                font_size_header: 14
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.archer_mr600_kib_s_received
+                line_width: 3
+                align_header: default
+                align_icon: left
+                align_state: center
+                height: 50
+                font_size: 60
+                font_size_header: 14
+                show:
+                  state: true
+                  fill: true
+                  graph: line
+                  icon_adaptive_color: true
+                icon: mdi:download
+                name: Downlink
+                hours_to_show: 12
+                points_per_hour: 30
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.archer_mr600_kib_s_sent
+                line_width: 3
+                align_header: default
+                align_icon: left
+                align_state: center
+                height: 50
+                font_size: 60
+                font_size_header: 14
+                show:
+                  state: true
+                  fill: true
+                  graph: line
+                  icon_adaptive_color: true
+                icon: mdi:upload
+                name: Uplink
+                hours_to_show: 12
+                points_per_hour: 30
+    secondary: ''
+    primary: Internet
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 70px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }
+  - type: custom:mushroom-template-card
+    secondary: ''
+    icon: mdi:server
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Dettagli Server
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px; 
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 1
+            type: grid
+            cards:
+              - square: false
+                columns: 3
+                type: grid
+                cards:
+                  - type: custom:mushroom-entity-card
+                    entity: binary_sensor.pve_haos8_2
+                    name: HASSOS
+                    layout: vertical
+                    icon_color: green
+                    icon: mdi:home-assistant
+                    primary_info: none
+                    secondary_info: state
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                  - type: custom:mushroom-entity-card
+                    entity: binary_sensor.pve_media_running
+                    name: HASSOS
+                    layout: vertical
+                    icon_color: green
+                    icon: mdi:plex
+                    primary_info: none
+                    secondary_info: state
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                  - type: custom:mushroom-entity-card
+                    entity: binary_sensor.pve_printserver_running
+                    name: HASSOS
+                    layout: vertical
+                    icon_color: green
+                    icon: mdi:printer
+                    primary_info: none
+                    secondary_info: state
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.pve_haos8_2
+                name: Eseguire restart di Home Assistant
+                icon_color: red
+                icon: mdi:restart
+                primary_info: name
+                secondary_info: none
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: call-service
+                  service: homeassistant.restart
+                  service_data: {}
+                  target: {}
+              - square: false
+                columns: 1
+                type: grid
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.glances_package_id_0_temperature
+                    line_width: 3
+                    align_header: default
+                    align_icon: left
+                    align_state: center
+                    height: 35
+                    font_size: 60
+                    font_size_header: 14
+                    show:
+                      fill: true
+                      graph: line
+                      icon_adaptive_color: true
+                    icon: mdi:thermometer
+                    name: CPU temp
+                    hours_to_show: 12
+                    points_per_hour: 30
+                    color_thresholds:
+                      - value: 45
+                        color: '#26cc0c'
+                      - value: 50
+                        color: '#ccac0c'
+                      - value: 65
+                        color: '#cc4c0c'
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.processor_use_percent
+                    line_width: 3
+                    align_header: default
+                    align_icon: left
+                    align_state: center
+                    height: 35
+                    font_size: 60
+                    font_size_header: 14
+                    show:
+                      fill: true
+                      graph: line
+                      icon_adaptive_color: true
+                    icon: mdi:cpu-64-bit
+                    name: CPU usage
+                    hours_to_show: 12
+                    points_per_hour: 30
+                    color_thresholds:
+                      - value: 0
+                        color: '#26cc0c'
+                      - value: 40
+                        color: '#ccac0c'
+                      - value: 75
+                        color: '#cc4c0c'
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.memory_use_percent
+                    line_width: 3
+                    align_header: default
+                    align_icon: left
+                    align_state: center
+                    height: 35
+                    font_size: 60
+                    font_size_header: 14
+                    show:
+                      fill: true
+                      graph: line
+                      icon_adaptive_color: true
+                    icon: mdi:chip
+                    name: Memory use
+                    hours_to_show: 12
+                    points_per_hour: 30
+                    color_thresholds:
+                      - value: 30
+                        color: '#26cc0c'
+                      - value: 50
+                        color: '#ccac0c'
+                      - value: 70
+                        color: '#cc4c0c'
+              - square: false
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.disk_use_percent_config
+                    line_width: 3
+                    align_header: default
+                    align_icon: left
+                    align_state: center
+                    height: 35
+                    font_size: 60
+                    font_size_header: 14
+                    show:
+                      fill: true
+                      graph: line
+                      icon_adaptive_color: true
+                    icon: mdi:memory
+                    name: Disk use
+                    hours_to_show: 12
+                    points_per_hour: 30
+                    color_thresholds:
+                      - value: 10
+                        color: '#26cc0c'
+                      - value: 65
+                        color: '#ccac0c'
+                      - value: 90
+                        color: '#cc4c0c'
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.mariadb
+                    line_width: 3
+                    align_header: default
+                    align_icon: left
+                    align_state: center
+                    height: 35
+                    font_size: 60
+                    font_size_header: 14
+                    show:
+                      fill: true
+                      graph: line
+                      icon_adaptive_color: true
+                    icon: mdi:database-outline
+                    name: Database size
+                    hours_to_show: 12
+                    points_per_hour: 30
+                    color_thresholds:
+                      - value: 0
+                        color: '#26cc0c'
+                      - value: 1000
+                        color: '#ccac0c'
+                      - value: 2000
+                        color: '#cc4c0c'
+    layout: vertical
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    icon_color: >-
+      {% if is_state('binary_sensor.pve_haos8_2', 'on') and
+      is_state('binary_sensor.pve_media_running', 'on') and
+      is_state('binary_sensor.pve_printserver_running', 'on') %}
+
+      green
+
+      {% elif ( states( 'sensor.glances_package_id_0_temperature' ) | float ) >
+      50.00 %}
+
+      pink
+
+      {% elif ( states( 'sensor.processor_use_percent' ) | float ) > 50.00 %}
+
+      pink
+
+      {% elif ( states( 'sensor.memory_use_percent' ) | float ) > 50.00 %}
+
+      pink
+
+      {% elif ( states( 'sensor.disk_use_percent_config' ) | float ) > 85.00 %}
+
+      pink
+
+      {% else %}
+
+      orange
+
+      {% endif %}
+    entity: binary_sensor.pve_haosova_6_2_running
+    primary: Server
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 70px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }
+  - type: custom:mushroom-template-card
+    icon: mdi:battery-charging-100
+    icon_color: |-
+      {% if is_state('input_boolean.battery_allarme', 'on') %}
+      red
+      {% else %}
+      green
+      {% endif %}
+    entity: input_boolean.battery_allarme
+    layout: vertical
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        title: Dettagli Server
+        card:
+          type: custom:mod-card
+          style: |
+            ha-card {
+               padding-top: 10px;
+               padding-right: 10px;
+               padding-left: 10px;
+               padding-bottom: 10px; 
+               heigh: 500px;
+            }
+          card:
+            square: false
+            columns: 5
+            type: grid
+            cards:
+              - type: custom:button-card
+                name: Campanello
+                entity: sensor.ingresso_principale_battery
+                size: 30px
+                color_type: card
+                icon: mdi:doorbell-video
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: Switchbot
+                entity: sensor.fraraspa_gmail_com_battery
+                size: 30px
+                color_type: card
+                icon: mdi:door-closed-lock
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: Porta Ingresso
+                entity: sensor.0x00158d0007bf130c_battery
+                size: 30px
+                color_type: card
+                icon: hue:room-other
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: (Entrata)
+                entity: sensor.interruttore_sala_porta_battery_level
+                size: 25px
+                color_type: card
+                icon: hue:room-front-door
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Sala)
+                entity: sensor.interruttore_sala_battery_level
+                size: 25px
+                color_type: card
+                icon: hue:room-dining
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: Tablet Sala
+                entity: sensor.galaxy_tab_a7_battery_level
+                size: 30px
+                color_type: card
+                icon: mdi:tablet-dashboard
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: Frigo
+                entity: sensor.0x00158d00075a7f41_battery
+                size: 30px
+                color_type: card
+                icon: mdi:snowflake
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: (Cucina)
+                entity: sensor.hue_motion_sensor_cucina_battery
+                size: 25px
+                color_type: card
+                icon: hue:motion-sensor
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (F)
+                entity: sensor.0x00158d0007d12925_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-kitchen
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Luci)
+                entity: sensor.interruttore_bagno_battery_level
+                size: 25px
+                color_type: card
+                icon: hue:room-bathroom
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (F)
+                entity: sensor.0x00158d0007b7daef_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-bathroom
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Luci)
+                entity: sensor.0x00158d0007c58946_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-bedroom
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Letto)
+                entity: sensor.0x84fd27fffe16a5e4_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-bedroom
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Temp)
+                entity: sensor.0x00124b0022eb6c1c_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-bedroom
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Temp2)
+                entity: sensor.0x00158d000755c8d9_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-bedroom
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (F)
+                entity: sensor.0x00158d0007ef5a4e_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-bedroom
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Scale)
+                entity: sensor.hue_motion_sensor_scale_battery
+                size: 25px
+                color_type: card
+                icon: hue:motion-sensor
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Luci)
+                entity: sensor.interruttore_salotto_battery_level
+                size: 25px
+                color_type: card
+                icon: hue:room-living
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (F)
+                entity: sensor.0x00158d0007ecdbf6_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-living
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Temp)
+                entity: sensor.temperatura_salotto_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-living
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (PC)
+                entity: sensor.0x00124b0022665ccc_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-computer
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (PC)
+                entity: sensor.device_power
+                size: 25px
+                color_type: card
+                icon: hue:motion-sensor
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: Sottotetto
+                entity: sensor.0x00124b00234468de_battery
+                size: 30px
+                color_type: card
+                icon: hue:room-attic
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: Finestra server
+                entity: sensor.0x00124b002247a7a3_battery
+                size: 30px
+                color_type: card
+                icon: hue:ceiling-aurelle
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: Svapo
+                entity: sensor.0x00124b0023ebc150_battery
+                size: 30px
+                color_type: card
+                icon: hue:room-garage
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: Freezer
+                entity: sensor.0x00158d0007df5ba4_battery
+                size: 30px
+                color_type: card
+                icon: mdi:snowflake-variant
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: (Gate)
+                entity: sensor.0x00158d0007d207df_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-bbq
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (F)
+                entity: sensor.0x00158d0007e63a54_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-bbq
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Gate)
+                entity: sensor.0x00158d0007d12896_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-terrace
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (F)
+                entity: sensor.0x00158d0007ecdb4c_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-terrace
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: Porta Garage
+                entity: sensor.0x00124b002344b292_battery
+                size: 30px
+                color_type: card
+                icon: hue:room-carport
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: Basculante Garage
+                entity: sensor.0x00124b0023ebb4c2_battery
+                size: 30px
+                color_type: card
+                icon: mdi:garage-lock
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: false
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+              - type: custom:button-card
+                name: (Temp)
+                entity: sensor.sonoff_a48001620f_battery
+                size: 25px
+                color_type: card
+                icon: hue:room-driveway
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Sotto)
+                entity: sensor.0x0015bc003100c2bf_battery
+                size: 25px
+                color_type: card
+                icon: mdi:smoke-detector-variant
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+              - type: custom:button-card
+                name: (Sopra)
+                entity: sensor.0x0015bc003100c3e1_battery
+                size: 25px
+                color_type: card
+                icon: mdi:smoke-detector-variant
+                state:
+                  - color: rgb(153,255,153)
+                    operator: '>'
+                    value: 70
+                  - color: rgb(204,255,204)
+                    operator: '>'
+                    value: 50
+                  - color: rgb(255,255,204)
+                    operator: '>'
+                    value: 35
+                  - color: rgb(255,204,204)
+                    operator: '>'
+                    value: 20
+                  - color: rgb(255,153,153)
+                    operator: <
+                    value: 20
+                show_state: false
+                show_name: true
+                layout: vertical
+                styles:
+                  card:
+                    - height: 60px
+                    - font-size: 12px
+    secondary: ''
+    primary: Batterie
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 70px !important;
+          }
+          :host {
+                --mush-card-primary-font-size: 12px;
+                --mush-card-secondary-font-size: 10px;
+                --mush-spacing: 6px;
+                }

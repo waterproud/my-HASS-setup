@@ -1,0 +1,469 @@
+type: custom:mushroom-chips-card
+chips:
+  - type: template
+    double_tap_action:
+      action: toggle
+    entity: input_boolean.francesco_present
+    icon: mdi:face-man
+    icon_color: |-
+      {% if is_state('input_boolean.francesco_present', 'on') %}
+      green
+      {% else %}
+      red
+      {% endif %}
+    tap_action:
+      action: more-info
+    hold_action:
+      action: toggle
+    content: ''
+  - type: template
+    double_tap_action:
+      action: toggle
+    entity: input_boolean.giovanna_present
+    icon: mdi:face-woman
+    icon_color: |-
+      {% if is_state('input_boolean.giovanna_present', 'on') %}
+      green
+      {% else %}
+      red
+      {% endif %}
+    tap_action:
+      action: more-info
+    hold_action:
+      action: toggle
+    content: ''
+  - type: conditional
+    conditions:
+      - entity: light.tutte_le_luci
+        state: 'on'
+    chip:
+      type: light
+      entity: light.tutte_le_luci
+      name: Luci accese in casa
+      tap_action:
+        action: toggle
+      content_info: none
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.porte
+        state: 'on'
+    chip:
+      type: entity
+      entity: binary_sensor.porte
+      name: Porte aperte
+      icon_color: red
+      content_info: none
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+      icon: hue:room-other
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.finestre
+        state: 'on'
+    chip:
+      type: entity
+      entity: binary_sensor.finestre
+      name: Porte aperte
+      icon_color: red
+      content_info: none
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+      icon: mdi:window-open-variant
+  - type: conditional
+    conditions:
+      - entity: media_player.lg_webos_smart_tv
+        state: 'on'
+    chip:
+      type: entity
+      entity: media_player.lg_webos_smart_tv
+      icon: mdi:television-classic
+      icon_color: purple
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+      content_info: none
+  - type: conditional
+    conditions:
+      - entity: vacuum.roomba966
+        state: cleaning
+    chip:
+      type: entity
+      entity: vacuum.roomba966
+      icon_color: green
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+      content_info: none
+  - type: conditional
+    conditions:
+      - entity: vacuum.roomba966
+        state: returning
+    chip:
+      type: entity
+      entity: vacuum.roomba966
+      content_info: none
+      icon_color: amber
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: vacuum.roomba966
+        state: error
+    chip:
+      type: entity
+      entity: vacuum.roomba966
+      icon_color: red
+      content_info: none
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: vacuum.roomba966
+        state: paused
+    chip:
+      type: entity
+      entity: vacuum.roomba966
+      content_info: none
+      icon_color: blue
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.roomba966_bin_full
+        state: 'on'
+    chip:
+      type: entity
+      entity: binary_sensor.roomba966_bin_full
+      icon_color: red
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+      content_info: none
+  - type: conditional
+    conditions:
+      - entity: light.sonoff_a480025e30
+        state: 'on'
+    chip:
+      type: entity
+      entity: light.sonoff_a480025e30
+      icon: hue:room-carport
+      icon_color: orange
+      tap_action:
+        action: toggle
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+      content_info: none
+  - type: conditional
+    conditions:
+      - entity: input_boolean.frigo_allarme
+        state: 'on'
+    chip:
+      type: entity
+      entity: input_boolean.frigo_allarme
+      content_info: none
+      icon_color: blue
+      hold_action:
+        action: none
+      tap_action:
+        action: more-info
+      double_tap_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: input_boolean.freezer_allarme
+        state: 'on'
+    chip:
+      type: entity
+      entity: input_boolean.freezer_allarme
+      icon_color: blue
+      tap_action:
+        action: more-info
+      content_info: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: input_boolean.battery_allarme
+        state: 'on'
+    chip:
+      type: entity
+      entity: input_boolean.battery_allarme
+      content_info: none
+      icon_color: red
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: call-service
+        service: input_boolean.turn_off
+        service_data: {}
+        target:
+          entity_id: input_boolean.battery_allarme
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.0x0015bc003100c2bf_smoke
+        state: 'on'
+    chip:
+      type: entity
+      entity: binary_sensor.0x0015bc003100c2bf_smoke
+      icon: mdi:fire
+      icon_color: red
+      name: Sotto
+      content_info: name
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.0x0015bc003100c3e1_smoke
+        state: 'on'
+    chip:
+      type: entity
+      entity: binary_sensor.0x0015bc003100c3e1_smoke
+      icon: mdi:fire
+      icon_color: red
+      name: Sopra
+      content_info: name
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: switch.schedule_hvac_notte
+        state: 'on'
+    chip:
+      type: entity
+      entity: switch.schedule_hvac_notte
+      icon_color: purple
+      name: Timer
+      content_info: none
+      icon: mdi:fan-clock
+      tap_action:
+        action: fire-dom-event
+        browser_mod:
+          command: popup
+          title: Opzioni Timer
+          card:
+            type: custom:mod-card
+            style: |
+              ha-card {
+                 padding-top: 20px;
+                 padding-right: 20px;
+                 padding-left: 20px;
+                 padding-bottom: 20px;     
+              }
+            card:
+              type: custom:scheduler-card
+              standard_configuration: true
+              discover_existing: true
+              include:
+                - climate
+              exclude: []
+              title: true
+              sort_by:
+                - state
+                - relative-time
+              display_options:
+                primary_info: '{entity}: {action}'
+                secondary_info:
+                  - relative-time
+                  - days
+                  - time
+                  - additional-tasks
+                icon: action
+              show_header_toggle: false
+  - type: conditional
+    conditions:
+      - entity: input_boolean.philipscamera_fan_on_off
+        state: 'on'
+    chip:
+      type: entity
+      entity: input_boolean.philipscamera_fan_on_off
+      icon_color: orange
+      icon: mdi:ceiling-fan
+      tap_action:
+        action: call-service
+        service: remote.send_command
+        data:
+          device: philipscamera
+          command: fan 0
+        target:
+          entity_id: remote.broadlink_remote
+      content_info: none
+  - type: conditional
+    conditions:
+      - entity: climate.daikin_sala
+        state: cool
+    chip:
+      type: entity
+      entity: climate.daikin_sala
+      icon: mdi:air-conditioner
+      name: Sala
+      content_info: name
+      icon_color: blue
+      tap_action:
+        action: more-info
+      double_tap_action:
+        action: none
+      hold_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: climate.daikin_sala
+        state: dry
+    chip:
+      type: entity
+      entity: climate.daikin_sala
+      icon: mdi:air-conditioner
+      name: Sala
+      content_info: name
+      icon_color: amber
+      tap_action:
+        action: more-info
+      double_tap_action:
+        action: none
+      hold_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: climate.daikin_sala
+        state: heat
+    chip:
+      type: entity
+      entity: climate.daikin_sala
+      icon: mdi:air-conditioner
+      name: Sala
+      content_info: name
+      icon_color: red
+      tap_action:
+        action: more-info
+      double_tap_action:
+        action: none
+      hold_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: climate.daikin_sala
+        state: fan_only
+    chip:
+      type: entity
+      entity: climate.daikin_sala
+      icon: mdi:air-conditioner
+      name: Sala
+      content_info: name
+      icon_color: grey
+      tap_action:
+        action: more-info
+      double_tap_action:
+        action: none
+      hold_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: climate.daikin_salotto
+        state: cool
+    chip:
+      type: entity
+      entity: climate.daikin_salotto
+      icon: mdi:air-conditioner
+      name: Salotto
+      content_info: name
+      icon_color: blue
+      tap_action:
+        action: more-info
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: climate.daikin_salotto
+        state: dry
+    chip:
+      type: entity
+      entity: climate.daikin_salotto
+      icon: mdi:air-conditioner
+      name: Salotto
+      content_info: name
+      icon_color: amber
+      tap_action:
+        action: more-info
+      double_tap_action:
+        action: none
+      hold_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: climate.daikin_salotto
+        state: heat
+    chip:
+      type: entity
+      entity: climate.daikin_salotto
+      icon: mdi:air-conditioner
+      name: Salotto
+      content_info: name
+      icon_color: red
+      tap_action:
+        action: more-info
+      double_tap_action:
+        action: none
+      hold_action:
+        action: none
+  - type: conditional
+    conditions:
+      - entity: climate.daikin_salotto
+        state: fan_only
+    chip:
+      type: entity
+      entity: climate.daikin_salotto
+      icon: mdi:air-conditioner
+      name: Salotto
+      content_info: name
+      icon_color: grey
+      tap_action:
+        action: more-info
+      double_tap_action:
+        action: none
+      hold_action:
+        action: none
+alignment: center

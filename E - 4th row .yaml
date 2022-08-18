@@ -1,0 +1,297 @@
+square: false
+columns: 7
+type: grid
+cards:
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00158d0007bf130c_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Porta Ingresso
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00158d0007d12925_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    icon: hue:room-kitchen
+    name: Finestra Cucina
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00158d0007b7daef_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Finestra Bagno
+    icon: hue:room-bathroom
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00158d0007ef5a4e_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Finestra Camera
+    icon: hue:room-bedroom
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00158d0007ecdbf6_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Finestra sopra piccola
+    icon: hue:room-living
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00158d0007d207df_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Terrazza sotto
+    icon: mdi:grill-outline
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00158d0007e63a54_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Finestra Sala
+    icon: hue:downstairs
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00158d0007d12896_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Terrazza sopra
+    icon: hue:room-terrace
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00158d0007ecdb4c_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Finestra sopra
+    icon: hue:upstairs
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00124b0023ebc150_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Porta svapo
+    icon: hue:room-garage
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00124b002247a7a3_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Finestra server
+    icon: hue:ceiling-aurelle
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00124b00234468de_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Porta sottotetto
+    icon: hue:room-attic
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00124b002344b292_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Porta garage
+    icon: hue:room-carport
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.0x00124b0023ebb4c2_contact
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      action: more-info
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    layout: vertical
+    icon_color: cyan
+    name: Basculante garage
+    icon: mdi:garage-lock
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            height: 50px !important;
+            #background: teal;
+          }

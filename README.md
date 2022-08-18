@@ -33,12 +33,12 @@ The mushroom custom cards (mainly the template ones) are then used to display th
 <li> Mushroom </li>
 <li> Mushroom Themes</li>
 <br></br>
-The files/codes in this repository are organised based on the sections displayed on the home dashboard:
+<b>The files/codes in this repository are organised based on the sections displayed on the home dashboard:</b>
 <br></br>
 <li> Top alert row (🍄 chips) </li>
 <li> 1st row: automatic HVAC (day & night), scheduler, alarm </li>
-<li> 2nd row: "luci", all lights in the house </li>
-<li> Simple Thermostat </li>
-<li> Scheduler Card </li>
-<br></br>
-![alt text](https://user-images.githubusercontent.com/87419464/185454524-c3fd9a58-16d2-4637-8da0-80c58426c87e.jpg)
+<li> 2nd row: "Luci" - all lights in the house </li>
+<li> 3rd row: "Clima" - air purifiers, the 2 HVAC splits, and all outside and inside climate infos </li>
+<li> 4th row: "Accessi" - all contact sensors around the house </li>
+<li> 5th row: "Altro" - other stuff: Roomba, Music control, TV control, Car info // Power usage, Internet status & VPNs, Server stats, Batteries</li>
+![Home page](https://user-images.githubusercontent.com/87419464/185454524-c3fd9a58-16d2-4637-8da0-80c58426c87e.jpg)

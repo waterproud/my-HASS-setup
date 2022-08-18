@@ -40,5 +40,7 @@ The mushroom custom cards (mainly the template ones) are then used to display th
 <li> 2nd row: "Luci" - all lights in the house </li>
 <li> 3rd row: "Clima" - air purifiers, the 2 HVAC splits, and all outside and inside climate infos </li>
 <li> 4th row: "Accessi" - all contact sensors around the house </li>
-<li> 5th row: "Altro" - other stuff: Roomba, Music control, TV control, Car info // Power usage, Internet status & VPNs, Server stats, Batteries</li>
+<li> 5th row: "Altro" - other stuff: Roomba, Music control, TV control, Car info // Power usage, Internet status & VPNs, Server stats, Batteries </li>
+<br></br>
+
 ![Home page](https://user-images.githubusercontent.com/87419464/185454524-c3fd9a58-16d2-4637-8da0-80c58426c87e.jpg)
